@@ -1,6 +1,6 @@
 #include "Character.h"
 #include "Weapons.h"
-
+#include "MainMenu.h"
 using namespace std;
 
 
@@ -12,21 +12,37 @@ using namespace std;
 	 level = 0;
 	 dmgLvl = 5;
 	 exp = 0;
+	
+	 mainMenu::typewriter("Create your Character");
+	 std::cout << std::endl;
 
-	 std::cout << "Create your Character" << std::endl;
-	 std::cout << "Character name: ";
+	 mainMenu::typewriter("Character name: ");
 	 std::cin >> name;
-
-	 std::cout << std::endl;
-	 std::cout << "Hello, " << name << "! Here are your stats: " << std::endl;
-	 std::cout << "Inventory: " << inventory[1] << std::endl;
-	 ::cout << "Health: " << health << std::endl;
-	 std::cout << "Level: " << level << std::endl;
-	 std::cout << "Damage Level: " << dmgLvl << std::endl;
-	 std::cout << "exp: " << exp << std::endl;
 	 std::cout << std::endl;
 
-	 //std::cout << "Inventory: " << player.SetInventory() << std::endl; 
+	 mainMenu::typewriter("Hello, "); 
+	 std::cout << name;
+	mainMenu::typewriter("! Here are your stats: ");
+	 std::cout << std::endl;
+
+	 mainMenu::typewriter( "Inventory: ");
+	 std::cout  << inventory[1] << std::endl;
+
+	 mainMenu::typewriter("Health: ");
+	 std::cout << health << std::endl;
+
+	 mainMenu::typewriter("Level: ");
+	 std::cout << level << std::endl;
+
+	 mainMenu::typewriter("Damage Level: ");
+	 std::cout << dmgLvl << std::endl;
+
+	 mainMenu::typewriter("exp: ");
+	 std::cout << exp << std::endl;
+	 std::cout << std::endl;
+
+	 system("pause");
+	 system("cls");
  }
 
  //Set Character default inventory

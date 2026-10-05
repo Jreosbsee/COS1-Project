@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="COS1-Project.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Weapons.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Weapons.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
