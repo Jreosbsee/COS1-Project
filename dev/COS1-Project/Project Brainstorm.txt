@@ -1,0 +1,46 @@
+GAME TITLE: The Final Ruin.
+Video game idea.
+
+Player will travel through a map collecting items, coins, and artifacts related to the story.
+
+~~~Maps~~~ 
+- I'll start out with 1 "map" outline its difficulty, and then going on from there. I'll use ASCII to create the layout of the map, and make different rooms and interactive items.
+In full, I'd like to have at least 5 maps. If I stick to this, we'll have 4 maps that have an artifact and loot in each one, and then one map with a "boss" that gives OP item(s) to the
+player. It'd be cool if the player could replay the maps with the OP items equipped (just for the fun of causing chaos through the second playthrough)
+
+~~~Items~~~ 
+- Coins: There will be a coin system that allows the player to collect coins while traveling through the map. If I have time, I'd like to add a shop where the players can buy and sell items.
+- Armor: Armor will be obtained from defeating enemies or from the shop (if shop is implemented). Ideally, armor will be better as the player travel through the maps.
+
+~~~Weapons~~~ 
+- Player will start out with a default weapon. Other weapons will be found via defeating enemies or buying from the shop (if the shop is implemented).
+- Weapons will only consist of swords (or melee). Thinking of swords and daggers as the extent of this.
+- Weapons will deal different damage levels. Ideally, the weapons will be stronger as the player travel through the maps.
+
+
+
+
+Ideas to potentially imeplement later:
+- Difficulty (easy on default, and then a medium and hard mode)
+- Shop for coins
+
+
+Important things to work on:
+- Learning and implemnting ASCII.
+- Figuring out visual maps for the player to walk on and interact with.
+
+
+
+Links to outside resources:
+1) Learn to create MAPS and SCENARIOS in basic video games with C++: (https://www.youtube.com/watch?v=-563HaYKHYc)
+2) Command Prompt Console Game Engine (https://www.youtube.com/watch?v=cWc0hgYwZyc)
+3) RACING MANIA 🚗 | Console Car Racing Game in C++ | ASCII Graphics | Beginner Project(https://www.youtube.com/watch?v=7gTx5OgkcFQ)
+
+
+
+
+
+~~~~Notes review~~~~
+header = what exists
+cpp = how it works
+main = where the program starts
