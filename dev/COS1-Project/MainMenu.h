@@ -11,5 +11,8 @@ public:
 	//"typewriter" animation for menu and text dialogue.
 	static void typewriter(std::string text);
 
+	static void fasttypewriter(std::string text);
+
 	static void loadingAnimation();
+
 };

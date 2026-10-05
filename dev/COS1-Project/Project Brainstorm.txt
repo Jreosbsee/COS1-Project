@@ -1,3 +1,4 @@
+GAME TITLE: The Final Ruin.
 Video game idea.
 
 Player will travel through a map collecting items, coins, and artifacts related to the story.
