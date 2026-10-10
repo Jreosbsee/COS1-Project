@@ -44,3 +44,28 @@ Links to outside resources:
 header = what exists
 cpp = how it works
 main = where the program starts
+
+
+
+
+
+Story to add::
+
+Peace was never a permanent outcome. Savoy celebrated their victorious win againts the demonic war, but since that day, no one stepped up to take 
+the title "hero", leading to a plagued regime to form. This regime worshipped the very demons that almost destroyed their land, and are strategically
+planning (cryptic unreadable text here for demon name)'s resummoning. Many citizens of Savoy fought back against this regime, but without a leader, they
+failed time and time again. With time running out, Savoy is fearful for their fate. Who will take the title of hero? Who will step back up to the plate
+and take back the land they fought so hard to keep? That's where You come in, player.
+
+<Asks for players name and then provides stats>
+
+You're life within Savoy has been pretty average. Your familiy made enough income to live comfortably. You and your siblings pursued essential
+education to lead a normal life. The only action you took that provided a greater purpose was practicing the art of battle.
+
+You now find yourself finding the artifacts of heroism. You understand the severity of Savoy's fate, and decided to be among the few who dared tried to 
+bring peace back to your land. Many have died on this journey, but the reward of completing it makes life worth risking.
+
+
+Mission one.
+
+you are to clear the room of anyone that stands in your way. Locate and secure the artifact. 

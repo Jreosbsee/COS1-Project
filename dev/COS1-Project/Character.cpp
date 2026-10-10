@@ -1,17 +1,18 @@
 #include "Character.h"
 #include "Weapons.h"
 #include "MainMenu.h"
-using namespace std;
 
 
 //Set character default stats
- void Character::Setstat(std::string name, std::vector<std::string> inventory, int health, int level, int dmgLvl, int exp)
+ void Character::Setstat()
  {
-	 inventory = { " ", " ", " ", " ", " ", };
+
+	 vector<std::string> pInventory = { "Slot 1, Slot 2, Slot 3, Slot 4, Slot 5" };
 	 health = 100;
 	 level = 0;
-	 dmgLvl = 5;
+	 dmgLvl = 2;
 	 exp = 0;
+	
 	
 	 mainMenu::typewriter("Create your Character");
 	 std::cout << std::endl;
@@ -25,9 +26,6 @@ using namespace std;
 	mainMenu::typewriter("! Here are your stats: ");
 	 std::cout << std::endl;
 
-	 mainMenu::typewriter( "Inventory: ");
-	 std::cout  << inventory[1] << std::endl;
-
 	 mainMenu::typewriter("Health: ");
 	 std::cout << health << std::endl;
 
@@ -39,15 +37,17 @@ using namespace std;
 
 	 mainMenu::typewriter("exp: ");
 	 std::cout << exp << std::endl;
-	 std::cout << std::endl;
 
+	 mainMenu::typewriter("Inventory: ");
+	 
+	 //std::cout << pInventory << std::endl;
+	 std::cout << std::endl;
 	 system("pause");
 	 system("cls");
  }
 
  //Set Character default inventory
  void Character::SetInventory() {
-	 
-	 inventory = {"Aspirin bottle ", " ", " ", " ", " ",};
+	 //inventory.push_back(Weapons);
 	 
  }
