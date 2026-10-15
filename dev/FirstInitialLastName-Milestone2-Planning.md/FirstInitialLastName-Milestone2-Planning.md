@@ -5,7 +5,7 @@
 ## 📌 Project Overview
 
 **Project Name:**
-→   
+→   The Final Ruin 
   
 **What does your program currently do? (1–3 sentences)**   
 →
@@ -14,13 +14,13 @@
 ## 🔍 Current Progress Check  
   
 **What is working right now?**   
-→   
+→   Story, Character stats, NPC stats,
   
 **What is NOT working or incomplete?**   
-→   
+→   Menu selector, inventory, shops, and rest of the storyline.
   
 **What feels confusing or messy in your code?**   
-→
+→ I understand how integration needs to be added between my classes, but it feels messy adding all of these methods in different locations and ensuring that the code will execute properly.
 
 ---
 ## 🚀 Feature Planning  
@@ -132,9 +132,9 @@ List the tasks you plan to create as GitHub Issues:
   
 Before you start coding, ask yourself:  
   
-- [ ] Do I know what I’m building this week?   
-- [ ] Do I know where to start?   
-- [ ] Did I break my work into small tasks?   
+- [x] Do I know what I’m building this week?   
+- [x] Do I know where to start?   
+- [x] Did I break my work into small tasks?   
   
 If yes → start coding 🚀   
 If no → refine your plan first   

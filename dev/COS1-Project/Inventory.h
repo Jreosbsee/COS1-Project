@@ -10,8 +10,8 @@ class Inventory {
 	
 
 
-	void AddItem();
-	void RemoveItem();
+	static void AddItem();
+	static void RemoveItem();
 
 	//void RenameItem();
 };

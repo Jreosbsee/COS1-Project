@@ -22,7 +22,7 @@ void Story::mainStory() {
 		BroadSword bs;
 		LongSword ls;
 		Claymore cm;
-		Story con;
+		Story continu; //do I need this?
 	//--------------------------------------------------------------
 
 	//Story:
@@ -106,7 +106,13 @@ void Story::mainStory() {
 		system("pause");
 		system("cls");
 
-		
+
+		mainMenu::CenterOutput("First mission", n);
+		Sleep(2000);
+		system("cls");
+		mainMenu::CenterOutput("Locate and secure the artifact.", n);
+
+
 		//Default Weapon message:
 		def.DWDialogue();
 

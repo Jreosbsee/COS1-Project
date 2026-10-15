@@ -1,7 +1,9 @@
 #include "Character.h"
 #include "Weapons.h"
 #include "MainMenu.h"
+#include "NPC.h"
 
+//Character::Character() {}
 
 //Set character default stats
  void Character::Setstat()
@@ -11,9 +13,8 @@
 	 health = 100;
 	 level = 0;
 	 dmgLvl = 2;
-	 exp = 0;
 	
-	
+
 	 mainMenu::typewriter("Create your Character");
 	 std::cout << std::endl;
 
@@ -35,9 +36,6 @@
 	 mainMenu::typewriter("Damage Level: ");
 	 std::cout << dmgLvl << std::endl;
 
-	 mainMenu::typewriter("exp: ");
-	 std::cout << exp << std::endl;
-
 	 mainMenu::typewriter("Inventory: ");
 	 
 	 //std::cout << pInventory << std::endl;
@@ -50,4 +48,33 @@
  void Character::SetInventory() {
 	 //inventory.push_back(Weapons);
 	 
+ }
+
+
+
+ void Character::TakeDmg(int dmg) {
+	 health -= dmg;
+ }
+
+ int Character::GetHealth() {
+
+	 return health;
+}
+
+
+ void Character::SetLvl() {
+	 Character player;
+
+	 mainMenu::typewriter("You have leveled up!");
+	 std::cout << std::endl;
+	 mainMenu::typewriter("Current level: ");
+	 player.level = player.level + 1;
+	 player.health = player.health + 10;
+	 player.dmgLvl = player.dmgLvl + 2;
+ }
+
+ //attack
+ void CharAttack() {
+	 NPC npc;
+
  }

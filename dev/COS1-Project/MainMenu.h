@@ -6,7 +6,7 @@ class mainMenu {
 public:
 	std::string mMenu;
 
-	void MainMenu(std::string menu);
+	static void MainMenu(std::string menu);
 
 	static void CenterOutput(const char *s, int n);
 

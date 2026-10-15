@@ -5,18 +5,41 @@
 using namespace std;
 class Character
 {
-public:
+private:
 	
 	std::string name;
-	
-
 	//std::string  inventory[5];
 	int health;
 	int dmgLvl;
 	int level;
-	int exp;
 
+public:
+	//default constructor
+	Character();
+
+	//constructor
+	Character(std::string *_name, int *_health, int *_dmgLvl, int *_level) {
+		name = *_name;
+		health = *_health;
+		dmgLvl = *_dmgLvl;
+		level = *_level;
+		//int getHealth(*_health);
+	}
 	void Setstat();
+	
+	static void SetInventory();
 
-	void SetInventory();
+	
+	int GetHealth();
+	
+	static void SetLvl();
+
+
+
+	//attack
+	void TakeDmg(int dmg);
+
+	void crAttack();
+
+
 };
