@@ -16,7 +16,7 @@ int main() {
 	corruptKnight *corrknights;
 	mage *mages;
 	boss *bosses;
-
+	Story story;
 	//Weapons
 	
 	//woodenSword *def;

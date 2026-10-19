@@ -4,9 +4,9 @@
 
 class mainMenu {
 public:
-	std::string mMenu;
+	//std::string mMenu; | Probably not needed, can delete
 
-	static void MainMenu(std::string menu);
+	static void MainMenu();
 
 	static void CenterOutput(const char *s, int n);
 
@@ -17,4 +17,16 @@ public:
 
 	static void loadingAnimation();
 
+
+	
+};
+
+class OtherMenu {
+public:
+
+	//settings
+	static void Settings();
+
+	//Credits
+	static void Credits();
 };

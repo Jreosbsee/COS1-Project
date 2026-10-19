@@ -4,9 +4,7 @@ class Weapons {
 protected:
 	std::string name;
 	int level;
-	int dmgLvl;
-
-	
+	int dmgLvl;	
 };
 
 //Default weapon
@@ -17,18 +15,19 @@ public:
 };
 
 
-
 class BroadSword : public Weapons {
 public:
 	static void  SetWeapon();
 	static void BroadSwordDialogue();
 };
 
+
 class LongSword : public Weapons {
 public:
 	static void SetWeapon();
 	static void LongSwordDialogue();
 };
+
 
 class Claymore : public Weapons {
 public:

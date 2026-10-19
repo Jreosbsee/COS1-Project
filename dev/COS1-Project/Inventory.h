@@ -2,16 +2,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
-
-class Inventory {
-
-	vector<string> inventory; // = { "Slot 1, Slot 2, Slot 3, Slot 4, Slot 5" };
-	
 
 
-	static void AddItem();
-	static void RemoveItem();
-
-	//void RenameItem();
-};
+//class Inventory {
+//private:
+//	std::vector<std::string> inventory[6];
+//public:
+//	Inventory();
+//
+//	Inventory(std::vector<std::string> _inventory) {
+//		inventory[5] = _inventory;
+//	}
+//	//void DisplayInv();
+//	void AddItem(std::string item);
+//
+//};

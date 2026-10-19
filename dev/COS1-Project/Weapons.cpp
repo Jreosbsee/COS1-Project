@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "Weapons.h"
 #include "MainMenu.h"
+#include "Inventory.h"
 
 
 //woodenSword---------------------------------------------------------
@@ -27,7 +28,7 @@ void woodenSword::DWDialogue(){
 	mainMenu::typewriter("But it's at least something!");
 	std::cout << std::endl;
 
-	mainMenu::typewriter("Enter your weapon name here : ");
+	mainMenu::typewriter("Enter your weapon name here: ");
 	std::cin >> wname;
 	std::cout << std::endl;
 
@@ -74,6 +75,7 @@ void BroadSword::BroadSwordDialogue() {
 	std::cout << wname;
 	mainMenu::typewriter(" is now added to your inventory!");
 	std::cout << std::endl;
+	//inventory.AddItem("Broad Sword");
 
 	mainMenu::typewriter("Updated inventory: ");
 

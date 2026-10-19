@@ -13,7 +13,7 @@
 void Story::mainStory() {
 
 	mainMenu menu;
-	menu.MainMenu("menu");
+	menu.MainMenu();
 }
 
 	void Story::Continue(){
@@ -26,7 +26,9 @@ void Story::mainStory() {
 	//--------------------------------------------------------------
 
 	//Story:
-	
+		player.Setstat();
+
+
 		mainMenu::typewriter("Starting story");
 		mainMenu::loadingAnimation();
 		std::cout << std::endl;
@@ -36,7 +38,7 @@ void Story::mainStory() {
 		std::cout << std::endl;
 		std::cout << std::endl;
 		Sleep(1500);
-		mainMenu::typewriter("While their efforts proved success, their own fates did no, as the cost of saving savoy was their lives."); 
+		mainMenu::typewriter("While their efforts proved success, their own fates did not, as the cost of saving savoy was their lives."); 
 		std::cout << std::endl;
 		std::cout << std::endl;
 		Sleep(1500);
@@ -93,6 +95,8 @@ void Story::mainStory() {
 		std::cout << std::endl;
 		mainMenu::typewriter("essential education to live a normal life. The only action you took that provided a greater purpose");
 		std::cout << std::endl;
+	 
+	 
 		mainMenu::typewriter("was practicing the art of battle.");
 		std::cout << std::endl;
 		std::cout << std::endl;
@@ -111,10 +115,16 @@ void Story::mainStory() {
 		Sleep(2000);
 		system("cls");
 		mainMenu::CenterOutput("Locate and secure the artifact.", n);
-
+		Sleep(2000);
+		system("cls");
 
 		//Default Weapon message:
 		def.DWDialogue();
+		system("cls");
 
-		//Player recieves a new weapon! each one listed 
+		mainMenu::typewriter("now, let's send you into battle and see how you do!");
+		std::cout << std::endl;
+		crook::crDialogue();
+
+		
 }

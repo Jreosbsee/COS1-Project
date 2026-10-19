@@ -2,14 +2,14 @@
 #include "Weapons.h"
 #include "MainMenu.h"
 #include "NPC.h"
+#include "Inventory.h"
 
 //Character::Character() {}
 
 //Set character default stats
  void Character::Setstat()
  {
-
-	 vector<std::string> pInventory = { "Slot 1, Slot 2, Slot 3, Slot 4, Slot 5" };
+	 //inventory[5] =  "Slot 1", "Slot 2", "Slot 3", "Slot 4", "Slot 5";
 	 health = 100;
 	 level = 0;
 	 dmgLvl = 2;
@@ -37,8 +37,10 @@
 	 std::cout << dmgLvl << std::endl;
 
 	 mainMenu::typewriter("Inventory: ");
-	 
-	 //std::cout << pInventory << std::endl;
+	// Inventory inv;
+	//inv.DisplayInv();
+	//std::cout << inventory[5] << std::endl;
+	
 	 std::cout << std::endl;
 	 system("pause");
 	 system("cls");
@@ -46,22 +48,16 @@
 
  //Set Character default inventory
  void Character::SetInventory() {
-	 //inventory.push_back(Weapons);
+	 
 	 
  }
 
-
-
- void Character::TakeDmg(int dmg) {
-	 health -= dmg;
- }
-
+ //Getters
  int Character::GetHealth() {
-
-	 return health;
+	return health;
 }
 
-
+ //Setters
  void Character::SetLvl() {
 	 Character player;
 
@@ -73,8 +69,8 @@
 	 player.dmgLvl = player.dmgLvl + 2;
  }
 
- //attack
- void CharAttack() {
-	 NPC npc;
-
+ //attacks
+ void Character::EnemyAttk(int dmg) {
+	 health -= dmg;
+	 //NPC to player
  }
