@@ -1,15 +1,31 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include "Weapons.h"
+#include "Character.h"
 
 class NPC {
 public:
 
-	std::string name;
-	std::string inventory[2]; //2 for now
-	int health;
-	int level;
-	int dmgLvl;
+	std::string name = "NPC";
+	//std::string inventory[2]; //2 for now
+	int health = 100;
+	int level = 0;
+	int dmgLvl = 10000;
+
+
+	virtual void Attack() {
+
+	}
+
+	//setters
+	void SetHealth();
+
+	//getters
+	//NPC GetHealth();
+	//NPC GetDmgLvl();
+
+		
 };
 
 
@@ -17,16 +33,18 @@ public:
 //Enemy NPCs
 class crook : public NPC {
 public:
+
 	crook() {
 		name = "crook";
-		inventory[1] = "Wooden Sword"; //2 for now
-		health = 90;
+		//inventory[1] = "Wooden Sword"; //2 for now
+		health = 10; //OG: 90
 		level = 1;
 		dmgLvl = 3;
+
+		
 	}
 	static void crDialogue();
-	void crAttack(Character& player);
-	void CharAttkCR(int dmg);
+	void Attack() override {}
 };
 
 
@@ -34,14 +52,13 @@ class corruptKnight : public NPC {
 public:
 	corruptKnight() {
 		name = "Corrupt Knight";
-		inventory[1] = "Broad Sword";
-		health = 110;
+		//inventory[1] = "Broad Sword";
+		health = 10; //OG: 110
 		level = 2;
 		dmgLvl = 5;
 	}
 	static void ckDialogue();
-	void ckAttack(Character& player);
-	void CharAttkCK(int dmg);
+
 };
 
 
@@ -49,14 +66,12 @@ class mage : public NPC {
 public:
 	mage() {
 		name = "Mage";
-		inventory[1] = "Fairy Dust";
-		health = 50;
+		//inventory[1] = "Fairy Dust";
+		health = 10; //OG: 50
 		level = 5;
 		dmgLvl = 8;
 	}
 	static void maDialogue();
-	void maAttack(Character& player);
-	void CharAttkMA(int dmg);
 };
 
 
@@ -65,14 +80,12 @@ class boss : public NPC {
 public:
 	boss() {
 		name = "Boss"; //temp name
-		inventory[3] = "Skull of the Underworld", "Demon Sword";
-		health = 250;
+		//inventory[3] = "Skull of the Underworld", "Demon Sword";
+		health = 10; //OG: 250
 		level = 10;
 		dmgLvl = 10;
 	}
 	static void BoDialogue();
-	void BoAttack(Character& player);
-	void CharAttkBO(int dmg);
 };
 
 
@@ -103,7 +116,7 @@ class Royal : public NPC {
 class blacksmith : public NPC {
 	blacksmith() {
 		name = "Blacksmith";
-		inventory[2]; //shop?
+		//inventory[2]; //shop?
 	}
 	static void BsShop();
 };
@@ -111,25 +124,9 @@ class blacksmith : public NPC {
 class doctor : public NPC {
 	doctor() {
 		name = "Doctor";
-		inventory[2]; //shop?
+		//inventory[2]; //shop?
 	}
 	static void DrShop();
 
 };
 
-
-
-
-//Npc list:
-// Enemies:
-//crook
-//corruptKnight
-//mage
-//Boss NPC
-// Story:
-//Dweller
-//knight
-//Royal
-// Shop NPC
-//blacksmith
-//doctor

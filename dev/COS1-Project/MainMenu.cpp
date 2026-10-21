@@ -8,7 +8,7 @@
 void mainMenu::typewriter(std::string text) {
 	for (int i = 0; text[i] != '\0'; i++) {
 		std::cout << text[i] << "\xDB";
-		for (auto j = 0; j < 90000000; j++); //takes up lots of memory, is there a more modern solution?
+		for (auto j = 0; j < 90000000; j++); //is there a better solution?
 		std::cout << "\b \b";
 
 		//return 0;
@@ -21,7 +21,7 @@ void mainMenu::typewriter(std::string text) {
 //void mainMenu::fasttypewriter(std::string text) {
 //	for (int i = 0; text[i] != '\0'; i++) {
 //		std::cout << text[i] << "\xDB";
-//		for (auto j = 0; j < 600000; j++); //takes up lots of memory, is there a more modern solution?
+//		for (auto j = 0; j < 600000; j++); //is there a better solution?
 //		std::cout << "\b \b";
 //
 //	}
@@ -44,33 +44,8 @@ void mainMenu::loadingAnimation() {
 		//Note: animation has to be on a separate line due to deleting the beginning of it.
 		//find a workaround if possible.
 		
-
-
 	}
 }
-
-
-
-
-
-
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
-static std::string set_arrow(int point, int item_no) {
-
-	if (item_no == point) {
-		return "-->";
-	}
-	else {
-		return "   ";
-	}
-}
-
-
-
-
-
-
 
 
 void mainMenu::CenterOutput(const char *s, int n) {
@@ -104,9 +79,28 @@ void Exit()
 	std::exit(0);
 }
 
+
+//------------------------------------------------------------------------------
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
+std::string mainMenu::set_arrow(int point, int item_no) {
+
+	if (item_no == point) {
+		 
+		return "-->";
+	}
+	else {
+		return "   ";
+	}
+}
+
+
+
+
+
 void mainMenu::MainMenu() {
 	
-
+	 
 	int point = 1;
 	int min = 1, max = 4;
 
@@ -125,7 +119,7 @@ void mainMenu::MainMenu() {
 
 		while (true)
 		{
-			if (GetAsyncKeyState(VK_UP))
+			if (GetAsyncKeyState(VK_UP) & 0x8000)
 			{
 				if (point > min)
 				{
@@ -133,7 +127,7 @@ void mainMenu::MainMenu() {
 				}
 				break;
 			}
-			if (GetAsyncKeyState(VK_DOWN))
+			if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 			{
 				if (point < max)
 				{
@@ -173,11 +167,13 @@ void mainMenu::MainMenu() {
 
 		}
 	}
-
 }
 
+//------------------------------------------------------------------------------
 
-	
+
+
+
 //Settings page
 
 void OtherMenu::Settings() {

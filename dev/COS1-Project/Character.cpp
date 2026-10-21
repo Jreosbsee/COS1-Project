@@ -4,7 +4,11 @@
 #include "NPC.h"
 #include "Inventory.h"
 
-//Character::Character() {}
+Character::Character() {
+	health = 100;
+	level = 0;
+	dmgLvl = 3;
+}
 
 //Set character default stats
  void Character::Setstat()
@@ -36,7 +40,7 @@
 	 mainMenu::typewriter("Damage Level: ");
 	 std::cout << dmgLvl << std::endl;
 
-	 mainMenu::typewriter("Inventory: ");
+	//mainMenu::typewriter("Inventory: ");
 	// Inventory inv;
 	//inv.DisplayInv();
 	//std::cout << inventory[5] << std::endl;
@@ -47,15 +51,18 @@
  }
 
  //Set Character default inventory
- void Character::SetInventory() {
-	 
-	 
- }
+ //void Character::SetInventory() {
+ //}
 
  //Getters
  int Character::GetHealth() {
 	return health;
 }
+
+ int Character::GetDmgLvl()
+ {
+	 return dmgLvl;
+ }
 
  //Setters
  void Character::SetLvl() {
@@ -69,6 +76,11 @@
 	 player.dmgLvl = player.dmgLvl + 2;
  }
 
+ void Character::SetHealth(int newHeatlh) {
+	 crook crook1;
+	 health = newHeatlh;
+
+ }
  //attacks
  void Character::EnemyAttk(int dmg) {
 	 health -= dmg;

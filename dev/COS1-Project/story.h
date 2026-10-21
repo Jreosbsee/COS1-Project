@@ -3,9 +3,8 @@
 #include <iostream>
 class Story {
 public:
-
 	static void mainStory();
-
 	static void Continue();
+	static void Battle();
 };
 

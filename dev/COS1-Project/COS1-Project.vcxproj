@@ -140,9 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CombatMenu.cpp" />
     <ClCompile Include="COS1-Project.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="SandBox.cpp" />
     <ClCompile Include="Story.cpp" />
@@ -153,8 +155,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CombatMenu.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="SandBox.h" />
     <ClInclude Include="story.h" />

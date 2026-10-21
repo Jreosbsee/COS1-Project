@@ -7,7 +7,5 @@
 
 class Sandbox {
 public:
-
-
-	void sandBox();
+void sandBox();
 };

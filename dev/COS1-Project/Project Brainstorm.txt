@@ -69,3 +69,91 @@ bring peace back to your land. Many have died on this journey, but the reward of
 Mission one.
 
 you are to clear the room of anyone that stands in your way. Locate and secure the artifact. 
+
+
+
+Milestone 3: Things left to do before submitting:
+
+-Rewrite menu functionaliy to minimize confusion
+-Finish combat system for player
+-Finish combay system for enemy
+-Finishing any story that needs to be written
+-Creating text based story maps to connect everything together. Here is the outline:
+
+"Welcone to room (room name)!"
+Room info:
+
+x NPC's
+x enemies
+x artifacts
+
+
+What would you like to do?
+
+--> Talk to npc
+	Which NPC would you like to talk to?
+	--> NPC1
+	--> NPC2
+	--> NPC3
+--> Battle Enemy
+	Which enemy would you like to batle?
+	--> Enemy 1
+	--> Enemy 2
+	--> Enemy 3
+(Once all enemies are defeated, this will be available to select)
+--> collect artifact
+(Once artifact has been collected, this will be available to select)
+--> Proceed to next room
+
+That is the outline for all room in the game. Each room will have varying NPCs and Enemies to battle.
+- Player will level up after each room is cleared
+- Player will gain a new weapon after each room is cleared
+
+- Potentially some story line between rooms
+
+
+Things to note while creating rooms
+
+-Need to ensure enemy amount stays the same when player goes to talk to an NPC or collects artifact.
+-Make sure values reset for new rooms
+-
+
+
+
+
+EXTRA NOTES
+- 0x0008: Manipulates transition state flag
+-->Transition state flag indicates whether 
+pressing/releasing a key generated the keystroke message. 
+Flag is always set to 0 for WM_KEYDOWN/SYSKEYDOWN messages.
+Flag is always set to 1 for WM_KEYUP/SYSTEMUP messages.
+
+WM_KEYDOWN: Nonsystem key is pressed when ALT key is not pressed
+WM_SYSKEYDOWN: keyboard focus when user pressed f10 key
+(activates menu bar). OR holds down ALT key and then 
+presses another key.
+
+WM_KEYUP: Nonsystem key is released when ALT kay is not pressed
+WMSYSKEYUP: Keyboard focus when user release a key that
+was pressed while ALT key was held down. Also occurs when
+no window currenltly has keyboard focus.
+
+In the case of my menu, 0x0008 is checking when key is 
+pressed and released for up, down, and return keys.
+
+
+
+
+Story.cpp Line 131+:
+
+Need some sort of loop to continue battle until enemy is defeated, player dies, or player flees.
+
+
+
+
+
+
+Add critical hits method where theres a chance the player and the enemy can deal extra damage to each other
+
+-Lower the health of every NPC OR up the dmg level so battles dont take forever to finish. Battles should
+probably be 10 turns max.

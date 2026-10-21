@@ -17,7 +17,7 @@ public:
 
 	static void loadingAnimation();
 
-
+	static std::string set_arrow(int point, int item_no);
 	
 };
 
@@ -29,4 +29,14 @@ public:
 
 	//Credits
 	static void Credits();
+
+
+
+
+
+
+	
 };
+
+
+

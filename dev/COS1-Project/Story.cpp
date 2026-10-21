@@ -8,26 +8,28 @@
 #include "Weapons.h"
 #include "Inventory.h"
 #include "NPC.h"
+#include "SandBox.h"
+#include "CombatMenu.h"
 
-
+//Start right at main menu
 void Story::mainStory() {
-
+	Sandbox test;
+	CombatMenu cm;
+	Story battle;
 	mainMenu menu;
-	menu.MainMenu();
+
+	//battle.Battle();
+	test.sandBox();
+	//menu.MainMenu();
 }
 
+
+	//Menu --> Continue story 
 	void Story::Continue(){
 		Character player;
 		woodenSword def;
-		BroadSword bs;
-		LongSword ls;
-		Claymore cm;
-		Story continu; //do I need this?
-	//--------------------------------------------------------------
-
+		Story SBattle;
 	//Story:
-		player.Setstat();
-
 
 		mainMenu::typewriter("Starting story");
 		mainMenu::loadingAnimation();
@@ -124,7 +126,23 @@ void Story::mainStory() {
 
 		mainMenu::typewriter("now, let's send you into battle and see how you do!");
 		std::cout << std::endl;
-		crook::crDialogue();
-
-		
+		SBattle.Battle();
 }
+
+
+	void Story::Battle()
+	{
+		crook crook1;
+		Character user;
+		crook::crDialogue();
+	CombatMenu::PlayerCombat(crook1, user);
+
+		if (user.GetHealth() <= 0)
+		{
+			std::cout << "Game Over!" << std::endl;
+			std::cout << "Would you like to try again?" << std::endl;
+			system("pause"); // temp, will add GameOverScreen() for menu control
+			Story::Battle();
+		}
+		std::cout << "You won the battle!" << std::endl;
+	}

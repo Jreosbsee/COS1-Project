@@ -3,73 +3,21 @@
 #include "NPC.h"
 #include "MainMenu.h"
 
-//Npc list:
-// Enemies:
-//crook
-//corruptKnight
-//mage
-//Boss NPC
-// Story:
-//Dweller
-//knight
-//Royal
-// Shop NPC
-//blacksmith
-//doctor
-Character::Character() {}
-
-
-
-//enemy attacks player
-void crook::crAttack(Character& player) {
+//setter
+void NPC::SetHealth()
+{
 	
-	player.EnemyAttk(dmgLvl);
 }
 
-void corruptKnight::ckAttack(Character& player) {
-
-	player.EnemyAttk(dmgLvl);
-}
-
-void mage::maAttack(Character& player) {
-
-	player.EnemyAttk(dmgLvl);
-}
-
-void boss::BoAttack(Character& player) {
-
-	player.EnemyAttk(dmgLvl);
-}
-
-
-
-
-//player attack enemy
-void crook::CharAttkCR(int dmg) {
-	health -= dmg;
-}
-
-void corruptKnight::CharAttkCK(int dmg) {
-	health -= dmg;
-}
-
-void mage::CharAttkMA(int dmg) {
-	health -= dmg;
-}
-
-void boss::CharAttkBO(int dmg) {
-	health -= dmg;
-}
-
+//getters
 
 //dialogues and attacks for NPCs:
-
 //Crook
 void crook::crDialogue() {
-	crook cr;
+	
 
 	mainMenu::typewriter("You've encountered a crook!");
-		std:cout << std::endl;
+		std::cout << std::endl;
 
 		//Crook dialogue + attack
 		int randNum = rand() % 3;
@@ -86,10 +34,6 @@ void crook::crDialogue() {
 			std::cout << std::endl;
 		}
 	
-	std::cout << std::endl;
-	while (cr.health > 0) {
-	
-	}
 }
 
 
@@ -106,6 +50,8 @@ void corruptKnight::ckDialogue() {
 		mainMenu::typewriter("Corrupt Knight: I joined this force for the gear! And it'll prove great against you!");
 	}
 }
+
+
 //Mage
 void mage::maDialogue() {
 	int randNum = rand() % 2;
