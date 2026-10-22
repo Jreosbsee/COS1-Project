@@ -23,15 +23,27 @@ Each week I will summarize my milestone activity and progress by writing a stand
 
 ### Week 1
 
-Replace this paragraph with your stand up for this week. Use the prompts above to summarize your most recent milestone activity and work.
+
 
 ### Week 2
 
-My next stand up will go here...
+
 
 ### Week 3
+This week, a lot of great features were added (along with some refactoring):
+New Features:
+- Combat system to fight enemies
+- Battle room to battle multiple enemies and collect the artifacts!
+- Working arrow selection menu!
+Refactoring:
+- Added Setters and Getters for Character and NPC to clean up redundant code
+- Added 'Artifact' classes to Weapons.h
+  
+  I changed how the game is going to be displayed. Due to time, ASCII maps will not be an implementation at this time. Instead, all battle rooms and combat menus will be text-based.
 
-Stay tuned, this stand up is coming soon...
+Time has always been a challenge with plenty of outside obligations I am responsible for. Due to this, I feel that some features were rushed during development. As I was able to make the code work as I intended, I know that my biggest focus  for Milestone 4 will be refactoring the rest of my code and debugging issues that occur.
+
+
 
 ### Week 4
 
