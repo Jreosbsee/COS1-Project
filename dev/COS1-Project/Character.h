@@ -4,16 +4,39 @@
 #include <vector>
 class Character
 {
-public:
+private:
 	
-	std::string name = "name";
-	std::vector<std::string> inventory;
+	std::string name;
+	//std::string  inventory[6];
 	int health;
 	int dmgLvl;
 	int level;
-	int exp;
 
-	void Setstat(std::string name, std::vector<std::string> inventory, int health, int dmgLvl, int level, int exp);
+public:
+	//default constructor
+	Character();
 
-	void SetInventory();
+	//constructor
+	Character(std::string *_name, std::string *_inventory, int *_health, int *_dmgLvl, int *_level) {
+		name = *_name;
+		//inventory[6] = *_inventory;
+		health = *_health;
+		dmgLvl = *_dmgLvl;
+		level = *_level;
+	}
+	
+	//setters
+	void Setstat();
+	static void SetInventory();
+	static void SetLvl();
+	void SetHealth(int newHeatlh);
+	//getters
+	int GetDmgLvl();
+	int GetHealth();
+	
+
+	//attack
+	void EnemyAttk(int dmg); //NPC to player
+
+	
 };

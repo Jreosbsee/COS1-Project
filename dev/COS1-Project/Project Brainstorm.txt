@@ -44,3 +44,162 @@ Links to outside resources:
 header = what exists
 cpp = how it works
 main = where the program starts
+
+
+
+
+
+Story to add::
+
+Peace was never a permanent outcome. Savoy celebrated their victorious win againts the demonic war, but since that day, no one stepped up to take 
+the title "hero", leading to a plagued regime to form. This regime worshipped the very demons that almost destroyed their land, and are strategically
+planning (cryptic unreadable text here for demon name)'s resummoning. Many citizens of Savoy fought back against this regime, but without a leader, they
+failed time and time again. With time running out, Savoy is fearful for their fate. Who will take the title of hero? Who will step back up to the plate
+and take back the land they fought so hard to keep? That's where You come in, player.
+
+<Asks for players name and then provides stats>
+
+You're life within Savoy has been pretty average. Your familiy made enough income to live comfortably. You and your siblings pursued essential
+education to lead a normal life. The only action you took that provided a greater purpose was practicing the art of battle.
+
+You now find yourself finding the artifacts of heroism. You understand the severity of Savoy's fate, and decided to be among the few who dared tried to 
+bring peace back to your land. Many have died on this journey, but the reward of completing it makes life worth risking.
+
+
+Mission one.
+
+you are to clear the room of anyone that stands in your way. Locate and secure the artifact. 
+
+
+
+Milestone 3: Things left to do before submitting:
+
+-Rewrite menu functionaliy to minimize confusion
+-Finish combat system for player
+-Finish combay system for enemy
+-Finishing any story that needs to be written
+-Creating text based story maps to connect everything together. Here is the outline:
+
+"Welcone to room (room name)!"
+Room info:
+
+x NPC's
+x enemies
+x artifacts
+
+
+What would you like to do?
+
+--> Talk to npc
+	Which NPC would you like to talk to?
+	--> NPC1
+	--> NPC2
+	--> NPC3
+--> Battle Enemy
+	Which enemy would you like to batle?
+	--> Enemy 1
+	--> Enemy 2
+	--> Enemy 3
+(Once all enemies are defeated, this will be available to select)
+--> collect artifact
+(Once artifact has been collected, this will be available to select)
+--> Proceed to next room
+
+That is the outline for all room in the game. Each room will have varying NPCs and Enemies to battle.
+- Player will level up after each room is cleared
+- Player will gain a new weapon after each room is cleared
+
+- Potentially some story line between rooms
+
+
+Things to note while creating rooms
+
+-Need to ensure enemy amount stays the same when player goes to talk to an NPC or collects artifact.
+-Make sure values reset for new rooms
+-
+
+
+
+
+EXTRA NOTES
+- 0x0008: Manipulates transition state flag
+-->Transition state flag indicates whether 
+pressing/releasing a key generated the keystroke message. 
+Flag is always set to 0 for WM_KEYDOWN/SYSKEYDOWN messages.
+Flag is always set to 1 for WM_KEYUP/SYSTEMUP messages.
+
+WM_KEYDOWN: Nonsystem key is pressed when ALT key is not pressed
+WM_SYSKEYDOWN: keyboard focus when user pressed f10 key
+(activates menu bar). OR holds down ALT key and then 
+presses another key.
+
+WM_KEYUP: Nonsystem key is released when ALT kay is not pressed
+WMSYSKEYUP: Keyboard focus when user release a key that
+was pressed while ALT key was held down. Also occurs when
+no window currenltly has keyboard focus.
+
+In the case of my menu, 0x0008 is checking when key is 
+pressed and released for up, down, and return keys.
+
+
+
+
+Story.cpp Line 131+:
+
+Need some sort of loop to continue battle until enemy is defeated, player dies, or player flees.
+
+
+
+
+
+
+Add critical hits method where theres a chance the player and the enemy can deal extra damage to each other
+
+-Lower the health of every NPC OR up the dmg level so battles dont take forever to finish. Battles should
+probably be 10 turns max.
+
+
+
+Implement other weapons?
+
+- Need to remember weapon names
+-Weapon dmglvl needs to be added to character dmglvl
+
+
+
+
+
+
+
+
+
+
+BattleRoom:
+
+When crook is defeated, I didnt see message appear for that enemy.
+When mage is defeated, deaftead message pops up, but the mission info loops back into the menu, then it shows crook and mage defeated 
+under then ===The forgotten Amulet=== title.
+
+
+When selecting "battle crook" it battles both crook and mage.
+
+perssing collect artifact goes to "starting story" (this makes sense, no logic has yet been added for atifcats.)
+
+
+
+
+
+
+In battle:
+
+Keep health of player and enemy always showing at the top to keep better track of health?
+
+
+========================
+Your health: 100
+Enemy health: 100
+========================
+
+=== Select option below ===
+--> Attack
+--> Flee

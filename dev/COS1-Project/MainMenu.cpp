@@ -1,13 +1,18 @@
 #include <stdio.h>
 #include <windows.h>
+#include <iostream>
 #include "MainMenu.h"
+#include "story.h"
+
 
 void mainMenu::typewriter(std::string text) {
 	for (int i = 0; text[i] != '\0'; i++) {
 		std::cout << text[i] << "\xDB";
-		for (auto j = 0; j < 60000000; j++); //takes up lots of memory, is there a more modern solution?
+		for (auto j = 0; j < 90000000; j++); //is there a better solution?
 		std::cout << "\b \b";
-		
+
+		//OG: 90000000
+		//return 0;
 	}
 	
 }
@@ -17,13 +22,14 @@ void mainMenu::typewriter(std::string text) {
 //void mainMenu::fasttypewriter(std::string text) {
 //	for (int i = 0; text[i] != '\0'; i++) {
 //		std::cout << text[i] << "\xDB";
-//		for (auto j = 0; j < 600000; j++); //takes up lots of memory, is there a more modern solution?
+//		for (auto j = 0; j < 600000; j++); //is there a better solution?
 //		std::cout << "\b \b";
 //
 //	}
 //
 //}
 
+///------------------------------------------
 
 
 void mainMenu::loadingAnimation() {
@@ -39,94 +45,235 @@ void mainMenu::loadingAnimation() {
 		//Note: animation has to be on a separate line due to deleting the beginning of it.
 		//find a workaround if possible.
 		
-
-
 	}
 }
-void mainMenu::MainMenu(std::string menu){
 
 
-	//115x26
-	typewriter("===================================================================================================================");
-	for (int i = 0; i < 8; i++) {
-		std::cout << std::endl;
-		std::cout << ("|                                                                                                                 |");
-		Sleep(10);
-	}
+void mainMenu::CenterOutput(const char *s, int n) {
+	printf("%*s\n", (n + (int)strlen(s)) / 2, s);
+};
 
-	//10 lines free.
+//Function for each option:
+
+void PlayGame()
+{
+	system("cls");
+	Story::Continue();
+}
+
+void Settings()
+{
+	system("cls");
+	OtherMenu::Settings();
 	
-	// 58 spaces markes the middle of the board. Change spacing accordign to characters used.
+}
+
+void Credits()
+{
+	system("cls");
+	OtherMenu::Credits();
 	
-	//line 1:
-	std::cout << std::endl;
-	std::cout << "|                                                   "; // spaces
-	typewriter("The Final Ruin");										// characters
-	std::cout << "                                                |"; // spaces
+}
+
+void Exit()
+{
+	std::exit(0);
+}
+
+
+//------------------------------------------------------------------------------
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
+std::string mainMenu::set_arrow(int point, int item_no) {
+
+	if (item_no == point) {
+		 
+		return "-->";
+	}
+	else {
+		return "   ";
+	}
+}
+
+
+
+
+
+void mainMenu::MainMenu() {
 	
+	 
+	int point = 1;
+	int min = 1, max = 4;
 
-	//line 2:
-	std::cout << std::endl;
-	std::cout << "|                                                     "; // spaces
-	typewriter("(1) Play Game!");											  // characters
-	std::cout << "                                              |"; // spaces
+	while (true) {
 
-	//line 2:
-	std::cout << std::endl;
-	std::cout << "|                                                     "; // spaces
-	typewriter("(2)Settings");												    // characters
-	std::cout << "                                                 |"; // spaces
+		system("cls");
+		std::cout << "=== The Final Ruin ===" << std::endl;
+		std::cout << set_arrow(point, 1);
+		std::cout << "Play Game" << std::endl;
+		std::cout << set_arrow(point, 2);
+		std::cout << "Settings" << std::endl;
+		std::cout << set_arrow(point, 3);
+		std::cout << "Credits" << std::endl;
+		std::cout << set_arrow(point, 4);
+		std::cout << "Exit" << std::endl;
 
+		while (true)
+		{
+			if (GetAsyncKeyState(VK_UP) & 0x8000)
+			{
+				if (point > min)
+				{
+					point--;
+				}
+				break;
+			}
+			if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+			{
+				if (point < max)
+				{
+					point++;
+				}
+				break;
+			}
+			if (GetAsyncKeyState(VK_RETURN))
+			{
+				while (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+					Sleep(10);
+					goto function_call;
+				}
+				
+			}
+		}
+		Sleep(100);
+		system("cls");
+		if (false)
+		{
+		function_call:
+			switch (point) {
 
-	//line 3:
-	std::cout << std::endl;
-	std::cout << "|                                                     ";  // spaces
-	typewriter("(3)Credits");												     // characters
-	std::cout << "                                                  |"; // spaces
+			case 1:
+				PlayGame();
+				break;
+			case 2:
+				Settings();
+				break;
+			case 3:
+				Credits();
+				break;
+			case 4:
+				Exit();
+				break;
+			}
 
-
-	//line 4:
-	std::cout << std::endl;
-	std::cout << "|                                                     "; // spaces
-	typewriter("(4)Exit");												    // characters
-	std::cout << "                                                     |"; // spaces
-
-	//line 4:
-	std::cout << std::endl;
-	std::cout << ("|                                                                                                                 |") << std::endl;
-	std::cout << "|                                                    ";
-	typewriter("Enter Option: ");												    // characters
-	std::cout << "                                               |"; // spaces
-
-
-
-	for (int i = 0; i < 8; i++) {
-		std::cout << std::endl;
-		std::cout << ("|                                                                                                                 |");
-		Sleep(10);
+		}
 	}
+}
+
+//------------------------------------------------------------------------------
+
+
+
+
+//Settings page
+
+void OtherMenu::Settings() {
+	mainMenu::typewriter("Settings!!!!");
 	std::cout << std::endl;
-	typewriter("===================================================================================================================");
+	system("pause");
+	Sleep(100);
+	//add menu functionality
+	//nothing serious here for now, just add some funny settings that don't affect game play
+}
 
-	int Option;
-	std::cin >> Option;
+void OtherMenu::Credits() {
+	mainMenu::typewriter("Credits: ");
+	std::cout << std::endl;
+	system("pause");
+	Sleep(100);
+	//add all of the roles I covered: project manager, developer, etc etc.
+	//mainMenu::typewriter("");
+}
 
-	switch (Option) {
-	case 1:
-		system("cls");
-		break;
-	case 2:
-		system("cls");
-		break;
-	case 3:
-		system("cls");
-		break;
-	case 4:
-		std::exit;
-	}
 
-	////Press any key to continue...
+
+
+
+
+
+
+
+//Used as a reference or deleted later:
+
+
+////Press any key to continue...
 //system("pause");
 ////Clears screen
 //system("cls");
-}
+
+
+
+
+		//int n = printf("                                                                                                                        ") - 2; //OG:120
+		//CenterOutput("===========================================================", n); //OG:120
+
+		//CenterOutput("=== The Final Ruin ===", n);
+		//std::cout << set_arrow(point, 1);
+		//CenterOutput("Play Game", n);
+		//std::cout << set_arrow(point, 2);
+		//CenterOutput("Settings", n);
+		//std::cout << set_arrow(point, 3);
+		//CenterOutput("Credits", n);
+		//std::cout << set_arrow(point, 4);
+		//CenterOutput("Exit", n);
+
+		//CenterOutput("===========================================================", n); //OG:120
+
+
+
+
+
+//	HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+//	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+//	INPUT_RECORD inp;
+//	DWORD num_of_events;
+//
+//	bool exit = false;
+//	int opt = 10;
+//	do {
+//		ReadConsoleInput(hIn, &inp, 1, &num_of_events);
+//
+//		switch (inp.EventType) {
+//
+//		case KEY_EVENT:
+//			switch (inp.Event.KeyEvent.wVirtualKeyCode) {
+//
+//			case VK_UP:
+//				if (opt > 4) {
+//					test--;
+//				}
+//				break;
+//
+//			case VK_DOWN:
+//				if (opt <= 0) {
+//					test++;
+//				}
+//				break;
+//
+//			case VK_LEFT:
+//				std::cout << "LEFT\n";
+//				break;
+//
+//			case VK_RIGHT:
+//				std::cout << "RIGHT\n";
+//				break;
+//
+//			case VK_ESCAPE:
+//				exit = true;
+//				break;
+//			}
+//			break;
+//		}
+//
+//	} while (!exit);
+//}

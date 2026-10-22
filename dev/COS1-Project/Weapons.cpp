@@ -3,21 +3,27 @@
 #include <windows.h>
 #include "Weapons.h"
 #include "MainMenu.h"
+#include "Inventory.h"
 
 
-//woodenSword class
-void woodenSword::SetDefaultWeapon(std::string sname) {
-	mainMenu::typewriter("Thanks for joining us on this journey! ");
+//woodenSword---------------------------------------------------------
+void woodenSword::SetDefaultWeapon() {
+
+	name = "Aspirin bottle";
+	level = 0;
+	dmgLvl = 3;
+}
+
+void woodenSword::DWDialogue(){
+
+	std::string wname; // false name
+
+	//dialogue
+	mainMenu::typewriter("Thanks for joining us on this journey! Please take this weapon. I know it's not much, But it's something! ");
 	std::cout << std::endl;
 
-	mainMenu::typewriter("Please take this weapon. I know it's not much,");
-	std::cout << std::endl;
-
-	mainMenu::typewriter("But it's at least something!");
-	std::cout << std::endl;
-
-	mainMenu::typewriter("Enter your weapon name here : ");
-	std::cin >> sname;
+	mainMenu::typewriter("Enter your weapon name here: ");
+	std::cin >> wname;
 	std::cout << std::endl;
 
 	mainMenu::typewriter("error, name not recognized..");
@@ -37,15 +43,47 @@ void woodenSword::SetDefaultWeapon(std::string sname) {
 	std::cout << std::endl;
 	
 	system("pause");
+	system("cls");	
+}
+
+//BroadSword---------------------------------------------------------
+void SetWeapon(BroadSword) {
+
+
+}
+
+void BroadSword::BroadSwordDialogue() {
+	std::string wname;
+	mainMenu::typewriter("You've found a BroadSword!");
+	std::cout << std::endl;
+
+	mainMenu::typewriter("Name your weapon: ");
+	std::cin >> wname;
+
+	mainMenu::typewriter("Success! ");
+	std::cout << wname;
+	mainMenu::typewriter(" is now added to your inventory!");
+	std::cout << std::endl;
+	//inventory.AddItem("Broad Sword");
+
+	mainMenu::typewriter("Updated inventory: ");
+
+
+	system("pause");
 	system("cls");
-	
 }
 
 
-//Weapons class
-void Weapons::SetWeaponName(std::string wname) {
 
-	mainMenu::typewriter("You've found a weapon!");
+
+//LongSword---------------------------------------------------------
+void SetWeapon(LongSword) {
+}
+
+void LongSword::LongSwordDialogue() {
+
+	std::string wname;
+	mainMenu::typewriter("You've found a LongSword!");
 	std::cout << std::endl;
 
 	mainMenu::typewriter("Name your weapon: ");
@@ -56,8 +94,54 @@ void Weapons::SetWeaponName(std::string wname) {
 	mainMenu::typewriter(" is now added to your inventory!");
 	std::cout << std::endl;
 
+	mainMenu::typewriter("Updated inventory: ");
+
+
 	system("pause");
 	system("cls");
 }
 
 
+//Claymore---------------------------------------------------------
+void SetWeapon(Claymore) {
+}
+
+void Claymore::ClaymoreDialogue() {
+
+	std::string wname;
+	mainMenu::typewriter("You've found a Claymore!");
+	std::cout << std::endl;
+
+	mainMenu::typewriter("Name your weapon: ");
+	std::cin >> wname;
+
+	mainMenu::typewriter("Success! ");
+	std::cout << wname;
+	mainMenu::typewriter(" is now added to your inventory!");
+	std::cout << std::endl;
+
+	mainMenu::typewriter("Updated inventory: ");
+
+
+	system("pause");
+	system("cls");
+}
+
+//Artifacts
+
+
+class Artifact1 {
+	std::string name = "The Lost Amulet";
+};
+
+class Artifact2 {
+	std::string name = "Four Star Grimoire";
+};
+
+class Artifact3 {
+	std::string name = "Artifact3";
+};
+
+class Artifact4 {
+
+};std::string name = "Artifact4";

@@ -1,26 +1,54 @@
 #include <iostream>
+#include "story.h"
 #include "Character.h"
-#include "Weapons.h" 
 #include "MainMenu.h"
-
-
+#include "Weapons.h"
+#include "Inventory.h"
+#include "NPC.h"
 
 int main() {
-	Character player;
-	Weapons starter;
+
+	//NPCs
+	//Story *story;
+	Story *continu; //might not need?
+	Character *players;
+	crook *crooks;
+	corruptKnight *corrknights;
+	mage *mages;
+	boss *bosses;
+	Story story;
+	//Weapons
+	
+	//woodenSword *def;
+	BroadSword brsw;
+	LongSword losw;
+	Claymore clmo;
+
+
+
+	woodenSword *defaul;
 	woodenSword def;
-	mainMenu menu;
+	defaul = &def;
+	//pointers ------------
+	// 
+	// 
+	//NPC Pointers
+	//Story* st = &story;
+	//Story* con = &continu; //might not need
+	//Character* Char = &players;
+	//crook* cr = &crooks;
+	//corruptKnight* ck = &corrknights;
+	//mage* ma = &mages;
+	//boss* bo = &bosses;
 
-	menu.MainMenu("menu");
 
-	//calls default stats + playername:
-	player.Setstat("name", {}, 100, 5, 0, 0);
+	//Weapons Pointers
+	/*woodenSword* ws = def;
+	BroadSword* bs = &brsw;
+	LongSword* ls = &losw;
+	Claymore* cl = &clmo;*/
 
-	//Default Weapon message:
-	def.SetDefaultWeapon("name");
-
-	//Player recieves a new weapon! (move to respesctive spot)
-	starter.SetWeaponName("name");
+	story.mainStory();
 }
 	
 	
