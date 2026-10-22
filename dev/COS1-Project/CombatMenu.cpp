@@ -16,6 +16,7 @@
 void CombatMenu::Attack(Character& player, NPC& enemy) {
 	enemy.health -= player.GetDmgLvl();
 	
+	system("cls");
 	std::cout << "=== ATTACK ===" << std::endl;
 	std::cout << "You attacked!" << std::endl;
 	std::cout << "Hit points: " << player.GetDmgLvl() << std::endl;
@@ -54,11 +55,15 @@ void CombatMenu::PlayerCombat(NPC& enemy, Character& player)
 	//int health = player.GetHealth();
 	while (true)
 	{
+		system("cls");
+		std::cout << "=== " << enemy.name << " ===";
+		std::cout << std::endl;
 		std::cout << "Your health: ";
 		std::cout << player.GetHealth() << std::endl;
 		//how to specify NPC?
 		std::cout << "Enemy health: ";
 		std::cout << enemy.health << std::endl;
+		std::cout << std::endl;
 		std::cout << "=== Select option below ===" << std::endl; //Should be typewriter
 		std::cout << mainMenu::set_arrow(point, 1);
 		std::cout << "Attack" << std::endl;
@@ -103,8 +108,10 @@ void CombatMenu::PlayerCombat(NPC& enemy, Character& player)
 				
 				if (enemy.health <= 0)
 				{
-					std::cout << "You have defeated " << enemy.name << "!" << std::endl;
+					system("cls");
+					std::cout << "You have defeated a " << enemy.name << "!" << std::endl;
 					system("pause");
+					system("cls");
 					return;
 				}
 				CombatMenu::EnemyCombat(enemy, player);
@@ -112,6 +119,7 @@ void CombatMenu::PlayerCombat(NPC& enemy, Character& player)
 				{
 					std::cout << "You have been defeated!" << std::endl;
 					system("pause");
+					system("cls");
 					return;
 				}
 				Sleep(100);
@@ -124,7 +132,8 @@ void CombatMenu::PlayerCombat(NPC& enemy, Character& player)
 				if (player.GetHealth() <= 0)
 				{
 					std::cout << "You have been defeated!" << std::endl;
-					system("puase");
+					system("pause");
+					system("cls");
 					return;
 				}
 				Sleep(100);
@@ -138,7 +147,7 @@ void CombatMenu::PlayerCombat(NPC& enemy, Character& player)
 
 	void CombatMenu::EnemyCombat(NPC& enemy, Character& player)
 	{
-		std::cout << "=== ENEMY ===" << std::endl;
+		std::cout << "=== " << enemy.name << " ===" << std::endl;
 		std::cout << "Enemy Attacked!" << std::endl;
 		std::cout << "Hit points: " << enemy.dmgLvl << std::endl;
 

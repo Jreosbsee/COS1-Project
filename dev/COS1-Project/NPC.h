@@ -11,7 +11,7 @@ public:
 	//std::string inventory[2]; //2 for now
 	int health = 100;
 	int level = 0;
-	int dmgLvl = 10000;
+	int dmgLvl = 10000; //temp
 
 
 	virtual void Attack() {
@@ -23,9 +23,7 @@ public:
 
 	//getters
 	//NPC GetHealth();
-	//NPC GetDmgLvl();
-
-		
+	//NPC GetDmgLvl();	
 };
 
 

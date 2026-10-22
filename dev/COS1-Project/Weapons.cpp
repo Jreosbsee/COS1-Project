@@ -19,13 +19,7 @@ void woodenSword::DWDialogue(){
 	std::string wname; // false name
 
 	//dialogue
-	mainMenu::typewriter("Thanks for joining us on this journey! ");
-	std::cout << std::endl;
-
-	mainMenu::typewriter("Please take this weapon. I know it's not much,");
-	std::cout << std::endl;
-
-	mainMenu::typewriter("But it's at least something!");
+	mainMenu::typewriter("Thanks for joining us on this journey! Please take this weapon. I know it's not much, But it's something! ");
 	std::cout << std::endl;
 
 	mainMenu::typewriter("Enter your weapon name here: ");
@@ -49,13 +43,8 @@ void woodenSword::DWDialogue(){
 	std::cout << std::endl;
 	
 	system("pause");
-	system("cls");
-	
+	system("cls");	
 }
-
-
-
-
 
 //BroadSword---------------------------------------------------------
 void SetWeapon(BroadSword) {
@@ -137,3 +126,22 @@ void Claymore::ClaymoreDialogue() {
 	system("pause");
 	system("cls");
 }
+
+//Artifacts
+
+
+class Artifact1 {
+	std::string name = "The Lost Amulet";
+};
+
+class Artifact2 {
+	std::string name = "Four Star Grimoire";
+};
+
+class Artifact3 {
+	std::string name = "Artifact3";
+};
+
+class Artifact4 {
+
+};std::string name = "Artifact4";

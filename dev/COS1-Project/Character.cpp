@@ -16,7 +16,7 @@ Character::Character() {
 	 //inventory[5] =  "Slot 1", "Slot 2", "Slot 3", "Slot 4", "Slot 5";
 	 health = 100;
 	 level = 0;
-	 dmgLvl = 2;
+	 dmgLvl = 3;
 	
 
 	 mainMenu::typewriter("Create your Character");

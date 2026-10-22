@@ -10,17 +10,15 @@
 #include "NPC.h"
 #include "SandBox.h"
 #include "CombatMenu.h"
+#include "BattleRoom.h"
+
 
 //Start right at main menu
 void Story::mainStory() {
-	Sandbox test;
-	CombatMenu cm;
-	Story battle;
-	mainMenu menu;
-
-	//battle.Battle();
-	test.sandBox();
-	//menu.MainMenu();
+	Character player;
+	BattleRoom5::EnterRoom(player);
+	/*mainMenu menu;
+	menu.MainMenu();*/
 }
 
 
@@ -84,7 +82,7 @@ void Story::mainStory() {
 		mainMenu::typewriter("Who will take the title of hero? Who will step up and take back the land Savoy fought so hard to keep?");
 		std::cout << std::endl;
 		std::cout << std::endl;
-		mainMenu::typewriter("That's where you come in , player.");
+		mainMenu::typewriter("That's where you come in, player.");
 		std::cout << std::endl;
 
 		system("pause");
@@ -93,7 +91,7 @@ void Story::mainStory() {
 		//calls default stats + playername:
 		player.Setstat();
 		
-		mainMenu::typewriter("You're life within Savy has been normal. Your family lived comfortable lives, you and your siblings pursued ");
+		mainMenu::typewriter("You're life within Savoy has been normal. Your family lived comfortable lives, you and your siblings pursued ");
 		std::cout << std::endl;
 		mainMenu::typewriter("essential education to live a normal life. The only action you took that provided a greater purpose");
 		std::cout << std::endl;
@@ -102,32 +100,33 @@ void Story::mainStory() {
 		mainMenu::typewriter("was practicing the art of battle.");
 		std::cout << std::endl;
 		std::cout << std::endl;
-		mainMenu::typewriter("You now find yourself retrieving the artifcats of heroism. You understand the severity of Savoy's fate, ");
+		mainMenu::typewriter("You now find yourself retrieving the artifcats of heroism. You understand the severity of Savoy's fate, and");
 		std::cout << std::endl;
-		mainMenu::typewriter("and decided to be among the few who dared to try and bring peace back to your land. Many have died on this");
+		mainMenu::typewriter("decided to be among the few who dared to try and bring peace back to your land. Many have died on this journey,");
 		std::cout << std::endl;
-		mainMenu::typewriter("journey, but the reward of completing it makes life worth risking.");
+		mainMenu::typewriter("but the reward of completing it makes life worth risking.");
 		std::cout << std::endl;
-
 		system("pause");
-		system("cls");
-
-
-		mainMenu::CenterOutput("First mission", n);
-		Sleep(2000);
-		system("cls");
-		mainMenu::CenterOutput("Locate and secure the artifact.", n);
-		Sleep(2000);
 		system("cls");
 
 		//Default Weapon message:
 		def.DWDialogue();
 		system("cls");
 
-		mainMenu::typewriter("now, let's send you into battle and see how you do!");
+		mainMenu::typewriter("Now, before we send you straight into enemy territory, let's have you fight a crook and see how you do!");
+		std::cout << std::endl;
+		system("pause");
 		std::cout << std::endl;
 		SBattle.Battle();
-}
+
+		std::cout << std::endl;
+		mainMenu::typewriter("Awesome! Now that you've gotten your feet wet, I think you're ready for battle. May Savoy be with you, soilder.");
+		std::cout << std::endl;
+
+		system("pause");
+		system("cls");
+		BattleRoom1::EnterRoom(player);
+	}
 
 
 	void Story::Battle()
@@ -135,14 +134,15 @@ void Story::mainStory() {
 		crook crook1;
 		Character user;
 		crook::crDialogue();
+		system("pause");
 	CombatMenu::PlayerCombat(crook1, user);
+	}
 
-		if (user.GetHealth() <= 0)
-		{
-			std::cout << "Game Over!" << std::endl;
-			std::cout << "Would you like to try again?" << std::endl;
-			system("pause"); // temp, will add GameOverScreen() for menu control
-			Story::Battle();
-		}
-		std::cout << "You won the battle!" << std::endl;
+	void Story::FinalStory() {
+		mainMenu::typewriter("You did it! You actually did it! Savoy has been saved once again!");
+		std::cout << std::endl;
+		mainMenu::typewriter("You win the game! Congrats!");
+		std::cout << std::endl;
+		system("pause");
+		mainMenu::MainMenu;
 	}

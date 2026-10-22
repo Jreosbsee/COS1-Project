@@ -157,3 +157,49 @@ Add critical hits method where theres a chance the player and the enemy can deal
 
 -Lower the health of every NPC OR up the dmg level so battles dont take forever to finish. Battles should
 probably be 10 turns max.
+
+
+
+Implement other weapons?
+
+- Need to remember weapon names
+-Weapon dmglvl needs to be added to character dmglvl
+
+
+
+
+
+
+
+
+
+
+BattleRoom:
+
+When crook is defeated, I didnt see message appear for that enemy.
+When mage is defeated, deaftead message pops up, but the mission info loops back into the menu, then it shows crook and mage defeated 
+under then ===The forgotten Amulet=== title.
+
+
+When selecting "battle crook" it battles both crook and mage.
+
+perssing collect artifact goes to "starting story" (this makes sense, no logic has yet been added for atifcats.)
+
+
+
+
+
+
+In battle:
+
+Keep health of player and enemy always showing at the top to keep better track of health?
+
+
+========================
+Your health: 100
+Enemy health: 100
+========================
+
+=== Select option below ===
+--> Attack
+--> Flee

@@ -6,5 +6,6 @@ public:
 	static void mainStory();
 	static void Continue();
 	static void Battle();
+	static void FinalStory();
 };
 

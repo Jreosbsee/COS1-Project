@@ -11,6 +11,7 @@ void mainMenu::typewriter(std::string text) {
 		for (auto j = 0; j < 90000000; j++); //is there a better solution?
 		std::cout << "\b \b";
 
+		//OG: 90000000
 		//return 0;
 	}
 	
