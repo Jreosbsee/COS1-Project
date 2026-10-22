@@ -16,7 +16,7 @@
 //Start right at main menu
 void Story::mainStory() {
 	Character player;
-	BattleRoom5::EnterRoom(player);
+	BattleRoom1::EnterRoom(player);
 	/*mainMenu menu;
 	menu.MainMenu();*/
 }

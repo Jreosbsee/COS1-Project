@@ -119,8 +119,6 @@ Things to note while creating rooms
 -
 
 
-
-
 EXTRA NOTES
 - 0x0008: Manipulates transition state flag
 -->Transition state flag indicates whether 
@@ -142,13 +140,9 @@ In the case of my menu, 0x0008 is checking when key is
 pressed and released for up, down, and return keys.
 
 
-
-
 Story.cpp Line 131+:
 
 Need some sort of loop to continue battle until enemy is defeated, player dies, or player flees.
-
-
 
 
 
@@ -164,12 +158,6 @@ Implement other weapons?
 
 - Need to remember weapon names
 -Weapon dmglvl needs to be added to character dmglvl
-
-
-
-
-
-
 
 
 
@@ -203,3 +191,16 @@ Enemy health: 100
 === Select option below ===
 --> Attack
 --> Flee
+
+
+
+
+
+
+
+Milestone 4 Tasks:
+BattleRoom:
+- Create one Battle Room class and pass in values to make it useable for all 5 rooms
+- Impelemnt Menu into Battle Room class
+- Use enemy collection to support multiple enemies within Battle Rooms.
+
