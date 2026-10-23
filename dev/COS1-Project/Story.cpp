@@ -15,8 +15,7 @@
 void Story::mainStory() 
 {
 	Character player;
-	//mainMenu::MainMenu();
-	BattleRoom5::EnterRoom(player);
+	mainMenu::MainMenu();
 }
 
 
