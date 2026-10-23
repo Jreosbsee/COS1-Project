@@ -6,19 +6,16 @@
 #include "Character.h"
 #include "MainMenu.h"
 #include "Weapons.h"
-#include "Inventory.h"
 #include "NPC.h"
-#include "SandBox.h"
 #include "CombatMenu.h"
 #include "BattleRoom.h"
 
 
 //Start right at main menu
-void Story::mainStory() {
-	Character player;
-	BattleRoom1::EnterRoom(player);
-	/*mainMenu menu;
-	menu.MainMenu();*/
+void Story::mainStory() 
+{
+	
+	mainMenu::MainMenu();
 }
 
 
@@ -26,7 +23,6 @@ void Story::mainStory() {
 	void Story::Continue(){
 		Character player;
 		woodenSword def;
-		Story SBattle;
 	//Story:
 
 		mainMenu::typewriter("Starting story");
@@ -117,7 +113,14 @@ void Story::mainStory() {
 		std::cout << std::endl;
 		system("pause");
 		std::cout << std::endl;
-		SBattle.Battle();
+		Story::Battle(player);
+		if (player.GetHealth() <= 0)
+		{
+			system("cls");
+			std::cout << " Game Over! You were defeated during training." << std::endl;
+			system("pause");
+			return;
+		}
 
 		std::cout << std::endl;
 		mainMenu::typewriter("Awesome! Now that you've gotten your feet wet, I think you're ready for battle. May Savoy be with you, soilder.");
@@ -129,13 +132,13 @@ void Story::mainStory() {
 	}
 
 
-	void Story::Battle()
+	void Story::Battle(Character& player)
 	{
 		crook crook1;
-		Character user;
+
 		crook::crDialogue();
 		system("pause");
-	CombatMenu::PlayerCombat(crook1, user);
+	CombatMenu::PlayerCombat(crook1, player);
 	}
 
 	void Story::FinalStory() {
@@ -144,5 +147,5 @@ void Story::mainStory() {
 		mainMenu::typewriter("You win the game! Congrats!");
 		std::cout << std::endl;
 		system("pause");
-		mainMenu::MainMenu;
+		//mainMenu::MainMenu();
 	}

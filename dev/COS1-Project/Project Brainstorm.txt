@@ -204,3 +204,23 @@ BattleRoom:
 - Impelemnt Menu into Battle Room class
 - Use enemy collection to support multiple enemies within Battle Rooms.
 
+
+
+Commit 1: Refactored Battle Room code
+
+Commit 2: 
+-Added health potion for every 3 enemies defeated.
+-->Added a kill counter to tack when enemies die, then rewards the 
+player a health potion that resets their health back to 100.
+
+-Refactored Character
+-->Fixed SetLvl() to only modify existing character
+-->Removed unnecessary objects and unused pointers/constructors
+-->Removed inventory functionality.
+-->Removed unnecessary comments and code duplications.
+
+-Refactored Main Menu
+-->Improved readability of code.
+-->Optimized typerwriter method.
+-->Optimized arrow-key based menu
+-->Removed unnecessary comments and code duplications.

@@ -4,35 +4,18 @@
 #include "MainMenu.h"
 #include "story.h"
 
-
-void mainMenu::typewriter(std::string text) {
-	for (int i = 0; text[i] != '\0'; i++) {
-		std::cout << text[i] << "\xDB";
-		for (auto j = 0; j < 90000000; j++); //is there a better solution?
-		std::cout << "\b \b";
-
-		//OG: 90000000
-		//return 0;
-	}
-	
+void mainMenu::typewriter(const std::string& text)
+{
+    for (char letter : text)
+    {
+        std::cout << letter << "\xDB" << std::flush;
+        Sleep(20); //adjust sleep speed
+        std::cout << "\b \b" << std::flush;
+    }
 }
 
-//if I need another method for faster animation:
-
-//void mainMenu::fasttypewriter(std::string text) {
-//	for (int i = 0; text[i] != '\0'; i++) {
-//		std::cout << text[i] << "\xDB";
-//		for (auto j = 0; j < 600000; j++); //is there a better solution?
-//		std::cout << "\b \b";
-//
-//	}
-//
-//}
-
-///------------------------------------------
-
-
-void mainMenu::loadingAnimation() {
+void mainMenu::loadingAnimation() 
+{
 	std::cout << std::endl;
 	for (int i = 0; i < 3; i++) {
 		std::cout << "." << std::flush;
@@ -42,12 +25,9 @@ void mainMenu::loadingAnimation() {
 		std::cout << "." << std::flush;
 		Sleep(500);
 		std::cout << "\r        \r";
-		//Note: animation has to be on a separate line due to deleting the beginning of it.
-		//find a workaround if possible.
-		
+		//Note: animation has to be on a separate line due to deleting the beginning of it.	
 	}
 }
-
 
 void mainMenu::CenterOutput(const char *s, int n) {
 	printf("%*s\n", (n + (int)strlen(s)) / 2, s);
@@ -80,11 +60,8 @@ void Exit()
 	std::exit(0);
 }
 
-
-//------------------------------------------------------------------------------
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
-std::string mainMenu::set_arrow(int point, int item_no) {
+std::string mainMenu::set_arrow(int point, int item_no)
+{
 
 	if (item_no == point) {
 		 
@@ -96,27 +73,20 @@ std::string mainMenu::set_arrow(int point, int item_no) {
 }
 
 
-
-
-
-void mainMenu::MainMenu() {
-	
-	 
+void mainMenu::MainMenu() 
+{
 	int point = 1;
-	int min = 1, max = 4;
+	const int min = 1;
+	const int max = 4;
 
-	while (true) {
-
+	while (true) 
+	{
 		system("cls");
 		std::cout << "=== The Final Ruin ===" << std::endl;
-		std::cout << set_arrow(point, 1);
-		std::cout << "Play Game" << std::endl;
-		std::cout << set_arrow(point, 2);
-		std::cout << "Settings" << std::endl;
-		std::cout << set_arrow(point, 3);
-		std::cout << "Credits" << std::endl;
-		std::cout << set_arrow(point, 4);
-		std::cout << "Exit" << std::endl;
+		std::cout << set_arrow(point, 1) << "Play Game" << std::endl;
+		std::cout << set_arrow(point, 2) << "Settings" << std::endl;
+		std::cout << set_arrow(point, 3) << "Credits" << std::endl;
+		std::cout << set_arrow(point, 4) << "Exit" << std::endl;
 
 		while (true)
 		{
@@ -128,7 +98,7 @@ void mainMenu::MainMenu() {
 				}
 				break;
 			}
-			if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+			else if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 			{
 				if (point < max)
 				{
@@ -136,47 +106,43 @@ void mainMenu::MainMenu() {
 				}
 				break;
 			}
-			if (GetAsyncKeyState(VK_RETURN))
+			else if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 			{
-				while (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+				while (GetAsyncKeyState(VK_RETURN) & 0x8000) 
+				{
 					Sleep(10);
-					goto function_call;
 				}
-				
+				switch (point) 
+				{
+
+				case 1:
+					PlayGame();
+					break;
+				case 2:
+					Settings();
+					break;
+				case 3:
+					Credits();
+					break;
+				case 4:
+					Exit();
+					break;
+				}
+				break;
 			}
+			Sleep(10);
 		}
-		Sleep(100);
-		system("cls");
-		if (false)
+		while ((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState(VK_DOWN) & 0x8000))
 		{
-		function_call:
-			switch (point) {
-
-			case 1:
-				PlayGame();
-				break;
-			case 2:
-				Settings();
-				break;
-			case 3:
-				Credits();
-				break;
-			case 4:
-				Exit();
-				break;
-			}
-
+			Sleep(10);
 		}
 	}
 }
-
-//------------------------------------------------------------------------------
 
 
 
 
 //Settings page
-
 void OtherMenu::Settings() {
 	mainMenu::typewriter("Settings!!!!");
 	std::cout << std::endl;
@@ -194,86 +160,3 @@ void OtherMenu::Credits() {
 	//add all of the roles I covered: project manager, developer, etc etc.
 	//mainMenu::typewriter("");
 }
-
-
-
-
-
-
-
-
-
-//Used as a reference or deleted later:
-
-
-////Press any key to continue...
-//system("pause");
-////Clears screen
-//system("cls");
-
-
-
-
-		//int n = printf("                                                                                                                        ") - 2; //OG:120
-		//CenterOutput("===========================================================", n); //OG:120
-
-		//CenterOutput("=== The Final Ruin ===", n);
-		//std::cout << set_arrow(point, 1);
-		//CenterOutput("Play Game", n);
-		//std::cout << set_arrow(point, 2);
-		//CenterOutput("Settings", n);
-		//std::cout << set_arrow(point, 3);
-		//CenterOutput("Credits", n);
-		//std::cout << set_arrow(point, 4);
-		//CenterOutput("Exit", n);
-
-		//CenterOutput("===========================================================", n); //OG:120
-
-
-
-
-
-//	HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
-//	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-//	INPUT_RECORD inp;
-//	DWORD num_of_events;
-//
-//	bool exit = false;
-//	int opt = 10;
-//	do {
-//		ReadConsoleInput(hIn, &inp, 1, &num_of_events);
-//
-//		switch (inp.EventType) {
-//
-//		case KEY_EVENT:
-//			switch (inp.Event.KeyEvent.wVirtualKeyCode) {
-//
-//			case VK_UP:
-//				if (opt > 4) {
-//					test--;
-//				}
-//				break;
-//
-//			case VK_DOWN:
-//				if (opt <= 0) {
-//					test++;
-//				}
-//				break;
-//
-//			case VK_LEFT:
-//				std::cout << "LEFT\n";
-//				break;
-//
-//			case VK_RIGHT:
-//				std::cout << "RIGHT\n";
-//				break;
-//
-//			case VK_ESCAPE:
-//				exit = true;
-//				break;
-//			}
-//			break;
-//		}
-//
-//	} while (!exit);
-//}

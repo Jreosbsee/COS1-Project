@@ -1,11 +1,11 @@
 #pragma once
-#include <string>
-#include <iostream>
+class Character;
+
 class Story {
 public:
 	static void mainStory();
 	static void Continue();
-	static void Battle();
+	static void Battle(Character& player);
 	static void FinalStory();
 };
 

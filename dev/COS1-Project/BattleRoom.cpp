@@ -14,28 +14,52 @@ bool AllEnemiesDefeated(const std::vector<NPC*>& enemies)
 	}
 	return true;
 }
+void GetHealing(Character& player, int& killCount)
+{
+	if (killCount >= 3)
+	{
+		player.SetHealth(100);
+
+		system("cls");
+		std::cout << "You found a health potion!" << std::endl;
+		std::cout << "Your health has been restored to 100!" << std::endl;
+		system("pause");
+
+		killCount = 0;
+	}
+}
 
 
-void FightEnemy(std::vector<NPC*>& enemies, int choice, Character& player) 
+void FightEnemy(std::vector<NPC*>& enemies, int choice,
+	Character& player, int& killCount)
 {
 	int index = choice - 1;
+
 	if (index < 0 || index >= static_cast<int>(enemies.size()))
 	{
 		return;
 	}
+
 	NPC* enemy = enemies[index];
 
-	if (enemy->health > 0)
+	if (enemy->health <= 0)
 	{
-		CombatMenu::PlayerCombat(*enemy, player);
-	}
-	else {
 		system("cls");
-		std::cout << enemy->name << " Already defeated!" << std::endl;
+		std::cout << enemy->name << " already defeated!" << std::endl;
 		system("pause");
 		system("cls");
+		return;
+	}
+
+	CombatMenu::PlayerCombat(*enemy, player);
+
+	if (enemy->health <= 0 && player.GetHealth() > 0)
+	{
+		killCount++;
+		GetHealing(player, killCount);
 	}
 }
+
 
 bool RunBattleRoom(Character& player,
 	std::vector<NPC*>& enemies,
@@ -45,7 +69,9 @@ bool RunBattleRoom(Character& player,
 {
 	player.SetHealth(100);
 	bool collectedArtifcact = false;
+	int killCount = 0;
 	int choice;
+	
 
 	int n = printf("                                                                                                                        ") - 2; //OG:120
 	system("cls");
@@ -92,7 +118,7 @@ bool RunBattleRoom(Character& player,
 		}
 		if (choice >= 1 && choice <= static_cast<int>(enemies.size()))
 		{
-			FightEnemy(enemies, choice, player);
+			FightEnemy(enemies, choice, player, killCount);
 		}
 		else if (choice == getOpt)
 		{
@@ -283,7 +309,7 @@ void BattleRoom5::EnterRoom(Character& player)
 		&corruptKnight1
 	};
 
-	bool CraftArtifact = false;
+	int killCount = 0;
 	int choice;
 
 	int n = printf("                                                                                                                        ") - 2; //OG:120
@@ -297,6 +323,7 @@ void BattleRoom5::EnterRoom(Character& player)
 
 	while (player.GetHealth() > 0)
 	{
+		system("cls");
 		bool enemiesDefeated = AllEnemiesDefeated(enemies);
 		bool roomCleared = enemiesDefeated && boss.health <= 0;
 		std::cout << "===The Final Ruin===" << std::endl;
@@ -335,11 +362,11 @@ void BattleRoom5::EnterRoom(Character& player)
 			continue;
 		}
 
-
 		if (choice >= 1 && choice <= static_cast<int>(enemies.size()))
 		{
-			FightEnemy(enemies, choice, player);
+			FightEnemy(enemies, choice, player, killCount);
 		}
+
 		else if (choice == bossOpt)
 		{
 			if (!enemiesDefeated)

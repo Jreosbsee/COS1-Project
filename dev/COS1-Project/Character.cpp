@@ -13,17 +13,12 @@ Character::Character() {
 //Set character default stats
  void Character::Setstat()
  {
-	 //inventory[5] =  "Slot 1", "Slot 2", "Slot 3", "Slot 4", "Slot 5";
-	 health = 100;
-	 level = 0;
-	 dmgLvl = 3;
-	
 
 	 mainMenu::typewriter("Create your Character");
 	 std::cout << std::endl;
 
 	 mainMenu::typewriter("Character name: ");
-	 std::cin >> name;
+	 std::getline(std::cin >> std::ws, name);
 	 std::cout << std::endl;
 
 	 mainMenu::typewriter("Hello, "); 
@@ -40,19 +35,10 @@ Character::Character() {
 	 mainMenu::typewriter("Damage Level: ");
 	 std::cout << dmgLvl << std::endl;
 
-	//mainMenu::typewriter("Inventory: ");
-	// Inventory inv;
-	//inv.DisplayInv();
-	//std::cout << inventory[5] << std::endl;
-	
 	 std::cout << std::endl;
 	 system("pause");
 	 system("cls");
  }
-
- //Set Character default inventory
- //void Character::SetInventory() {
- //}
 
  //Getters
  int Character::GetHealth() {
@@ -65,21 +51,30 @@ Character::Character() {
  }
 
  //Setters
- void Character::SetLvl() {
-	 Character player;
+
+ void Character::SetLvl()
+ {
+	 level++;
+	 health += 10;
+	 dmgLvl += 2;
 
 	 mainMenu::typewriter("You have leveled up!");
 	 std::cout << std::endl;
+
 	 mainMenu::typewriter("Current level: ");
-	 player.level = player.level + 1;
-	 player.health = player.health + 10;
-	 player.dmgLvl = player.dmgLvl + 2;
+	 std::cout << level << std::endl;
+
+	 mainMenu::typewriter("Health: ");
+	 std::cout << health << std::endl;
+
+	 mainMenu::typewriter("Damage Level: ");
+	 std::cout << dmgLvl << std::endl;
  }
 
- void Character::SetHealth(int newHeatlh) {
-	 crook crook1;
-	 health = newHeatlh;
 
+ void Character::SetHealth(int newHealth)
+ {
+	 health = newHealth;
  }
  //attacks
  void Character::EnemyAttk(int dmg) {
