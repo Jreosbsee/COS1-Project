@@ -8,22 +8,9 @@ class NPC {
 public:
 
 	std::string name = "NPC";
-	//std::string inventory[2]; //2 for now
 	int health = 100;
 	int level = 0;
-	int dmgLvl = 10000; //temp
-
-
-	virtual void Attack() {
-
-	}
-
-	//setters
-	void SetHealth();
-
-	//getters
-	//NPC GetHealth();
-	//NPC GetDmgLvl();	
+	int dmgLvl = 0;
 };
 
 
@@ -34,15 +21,13 @@ public:
 
 	crook() {
 		name = "crook";
-		//inventory[1] = "Wooden Sword"; //2 for now
-		health = 10; //OG: 90
+		health = 10;
 		level = 1;
 		dmgLvl = 3;
 
 		
 	}
 	static void crDialogue();
-	void Attack() override {}
 };
 
 
@@ -50,13 +35,12 @@ class corruptKnight : public NPC {
 public:
 	corruptKnight() {
 		name = "Corrupt Knight";
-		//inventory[1] = "Broad Sword";
-		health = 10; //OG: 110
+		health = 20; //OG 90
 		level = 2;
 		dmgLvl = 5;
 	}
 	static void ckDialogue();
-
+	
 };
 
 
@@ -64,8 +48,7 @@ class mage : public NPC {
 public:
 	mage() {
 		name = "Mage";
-		//inventory[1] = "Fairy Dust";
-		health = 10; //OG: 50
+		health = 15;
 		level = 5;
 		dmgLvl = 8;
 	}
@@ -77,54 +60,61 @@ public:
 class boss : public NPC {
 public:
 	boss() {
-		name = "Boss"; //temp name
-		//inventory[3] = "Skull of the Underworld", "Demon Sword";
-		health = 10; //OG: 250
+		name = "Malachar"; 
+
+		health = 50; 
 		level = 10;
-		dmgLvl = 10;
+		dmgLvl = 5;
 	}
 	static void BoDialogue();
 };
 
 
 
-//Story NPCs
-class dweller : public NPC {
-	dweller() {
-		name = "Dweller"; 
-		level = 0;
-	}
-};
+//Future Implementation
 
-class knight : public NPC {
-	knight() {
-		name = "knight";
-		level = 2;
-	}
-};
+////Story NPCs
+//class dweller : public NPC {
+//	dweller() {
+//		name = "Dweller"; 
+//		level = 0;
+//	}
+//};
+//
+//class knight : public NPC {
+//	knight() {
+//		name = "knight";
+//		level = 2;
+//	}
+//};
+//
+//class Royal : public NPC {
+//	Royal() {
+//		name = "Royal";
+//		level = 10;
+//	}
+//};
 
-class Royal : public NPC {
-	Royal() {
-		name = "Royal";
-		level = 10;
-	}
-};
 
-//Shop NPCs
-class blacksmith : public NPC {
-	blacksmith() {
-		name = "Blacksmith";
-		//inventory[2]; //shop?
-	}
-	static void BsShop();
-};
 
-class doctor : public NPC {
-	doctor() {
-		name = "Doctor";
-		//inventory[2]; //shop?
-	}
-	static void DrShop();
 
-};
 
+
+
+
+
+//FUTURE IMPLEMENTATION: NPC shops
+//class blacksmith : public NPC {
+//	blacksmith() {
+//		name = "Blacksmith";
+//	}
+//	static void BsShop();
+//};
+//
+//class doctor : public NPC {
+//	doctor() {
+//		name = "Doctor";
+//	}
+//	static void DrShop();
+//
+//};

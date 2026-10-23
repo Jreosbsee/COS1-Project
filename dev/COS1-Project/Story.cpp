@@ -6,19 +6,16 @@
 #include "Character.h"
 #include "MainMenu.h"
 #include "Weapons.h"
-#include "Inventory.h"
 #include "NPC.h"
-#include "SandBox.h"
 #include "CombatMenu.h"
 #include "BattleRoom.h"
 
 
 //Start right at main menu
-void Story::mainStory() {
+void Story::mainStory() 
+{
 	Character player;
-	BattleRoom5::EnterRoom(player);
-	/*mainMenu menu;
-	menu.MainMenu();*/
+	mainMenu::MainMenu();
 }
 
 
@@ -26,7 +23,6 @@ void Story::mainStory() {
 	void Story::Continue(){
 		Character player;
 		woodenSword def;
-		Story SBattle;
 	//Story:
 
 		mainMenu::typewriter("Starting story");
@@ -69,7 +65,7 @@ void Story::mainStory() {
 		Sleep(1500);
 		mainMenu::typewriter("This regime went by the name of Zloduh. They worshipped the very demons that sent Savoy into anguish, and are");
 		std::cout << std::endl;
-		mainMenu::typewriter("preparing for *his* resummoning.");
+		mainMenu::typewriter("preparing for Malachar's resummoning.");
 		std::cout << std::endl;
 		std::cout << std::endl;
 		Sleep(1500);
@@ -117,7 +113,14 @@ void Story::mainStory() {
 		std::cout << std::endl;
 		system("pause");
 		std::cout << std::endl;
-		SBattle.Battle();
+		Story::Battle(player);
+		if (player.GetHealth() <= 0)
+		{
+			system("cls");
+			std::cout << " Game Over! You were defeated during training." << std::endl;
+			system("pause");
+			return;
+		}
 
 		std::cout << std::endl;
 		mainMenu::typewriter("Awesome! Now that you've gotten your feet wet, I think you're ready for battle. May Savoy be with you, soilder.");
@@ -129,20 +132,21 @@ void Story::mainStory() {
 	}
 
 
-	void Story::Battle()
+	void Story::Battle(Character& player)
 	{
 		crook crook1;
-		Character user;
+
 		crook::crDialogue();
 		system("pause");
-	CombatMenu::PlayerCombat(crook1, user);
+	CombatMenu::PlayerCombat(crook1, player);
 	}
 
 	void Story::FinalStory() {
 		mainMenu::typewriter("You did it! You actually did it! Savoy has been saved once again!");
 		std::cout << std::endl;
+		system("pause");
 		mainMenu::typewriter("You win the game! Congrats!");
 		std::cout << std::endl;
 		system("pause");
-		mainMenu::MainMenu;
+		//mainMenu::MainMenu();
 	}

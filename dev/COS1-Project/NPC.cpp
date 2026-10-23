@@ -3,15 +3,8 @@
 #include "NPC.h"
 #include "MainMenu.h"
 
-//setter
-void NPC::SetHealth()
-{
-	
-}
-
-//getters
-
 //dialogues and attacks for NPCs:
+
 //Crook
 void crook::crDialogue() {
 	
@@ -39,7 +32,7 @@ void crook::crDialogue() {
 
 //Corrput Knight 
 void corruptKnight::ckDialogue() {
-	int randNum = rand() % 2;
+	int randNum = rand() % 3;
 	if (randNum == 0) {
 		mainMenu::typewriter("Corrupt Knight: Who needs rules? Making your own choices is fun!");
 	}
@@ -54,7 +47,7 @@ void corruptKnight::ckDialogue() {
 
 //Mage
 void mage::maDialogue() {
-	int randNum = rand() % 2;
+	int randNum = rand() % 3;
 	if (randNum == 0) {
 		mainMenu::typewriter("Mage: Who needs the blade when you have magic? Better watch out sword user!");
 	}
@@ -68,7 +61,7 @@ void mage::maDialogue() {
 
 //Boss
 void boss::BoDialogue() {
-	int randNum = rand() % 2;
+	int randNum = rand() % 3;
 	if (randNum == 0) {
 		mainMenu::typewriter("Boss: I've survived centuries against foes like you. Don't get your hopes up.");
 	}
@@ -81,16 +74,20 @@ void boss::BoDialogue() {
 }
 
 
-//shops
 
-void blacksmith::BsShop() {
-	mainMenu::typewriter("Looking for some weapons? You came to the right place!");
-	//shop
-}
 
-void doctor::DrShop() {
-	mainMenu::typewriter("Medicine usually doesn't heal instantly, but it does here!");
-	//shop
-}
+
+
+
+//SHOPS
+//void blacksmith::BsShop() {
+//	mainMenu::typewriter("Looking for some weapons? You came to the right place!");
+//	//shop
+//}
+//
+//void doctor::DrShop() {
+//	mainMenu::typewriter("Medicine usually doesn't heal instantly, but it does here!");
+//	//shop
+//}
 
 

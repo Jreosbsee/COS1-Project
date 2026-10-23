@@ -1,167 +1,113 @@
+#include <vector>
 #include "BattleRoom.h"
 #include "CombatMenu.h"
 #include "MainMenu.h"
 #include <Windows.h>
 #include "story.h"
-//===The Forgotten Amulet===
-void BattleRoom1::EnterRoom(Character& player) {
-	crook crook1;
-	mage mage1;
 
-
-	bool ColletedArtifact = false;
-	int choice;
-
-	int n = printf("                                                                                                                        ") - 2; //OG:120
-	system("cls");
-	mainMenu::CenterOutput("First mission", n);
-	Sleep(2000);
-	system("cls");
-	mainMenu::CenterOutput("Locate and secure the amulet.", n);
-	Sleep(2000);
-	system("cls");
-
-	while (player.GetHealth() > 0)
-	{
-		bool roomCleared = crook1.health <= 0 && mage1.health <= 0;
-
-		//temp menu, implement arrow menu later
-		std::cout << "===The Forgotten Amulet===" << std::endl;
-		std::cout << std::endl;
-		//only takes one, make it take multiple
-		std::cout << "Crook " << (crook1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n"; //add enemy amount | ex: 3 Alive, 2 Defeated.
-		std::cout << "Mage " << (mage1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << std::endl;
-
-		std::cout << "1. Battle Crook" << std::endl;
-		std::cout << "2. Battle Mage" << std::endl;
-		std::cout << "3. Collect artifact" << std::endl; //must defeat all enemies first
-		std::cout << "4. Proceed to the next room" << std::endl; //must collect artifact first
-		std::cout << "Choose an option: ";
-
-		if (!(std::cin >> choice))
-		{
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
-			continue;
-		}
-
-		switch (choice)
-		{
-			case 1:
-				if (crook1.health > 0)
-				{
-				CombatMenu::PlayerCombat(crook1, player);
-				}
-				else
-				{
-					system("cls");
-					std::cout << "Crook already defeated!" << std::endl;
-					system("pause");
-					system("cls");
-				}
-				break;
-			case 2:
-				if (mage1.health > 0)
-				{
-					CombatMenu::PlayerCombat(mage1, player);
-				}
-				else
-				{
-					system("cls");
-					std::cout << "Mage already defeated!" << std::endl;
-					system("pause");
-					system("cls");
-				}
-			
-				break;
-			case 3:
-				if (roomCleared)
-				{
-					ColletedArtifact = true;
-
-					system("cls");
-					std::cout << "You collected the artifact!" << std::endl;
-					system("pause");
-					system("cls");
-				}
-				else
-				{
-					system("cls");
-					std::cout << "You must defeat all of the enemies!" << std::endl;
-					system("pause");
-					system("cls");
-				}
-				break;
-			case 4:
-				if (ColletedArtifact)
-				{;
-					system("cls");
-					std::cout << "Prcoceeding to the next room!" << std::endl;
-					system("pause");
-					system("cls");
-					BattleRoom2::EnterRoom(player);
-				}
-				else
-				{
-					system("cls");
-					std::cout << "You must collect the artifact first!" << std::endl;
-					system("pause");
-					system("cls");
-				}
-				break;
-
-			default:
-				system("cls");
-				std::cout << "Invalid Option!" << std::endl;
-				system("pause");
-				system("cls");
-				break;
+bool AllEnemiesDefeated(const std::vector<NPC*>& enemies)
+{
+	for (NPC* enemy : enemies) {
+		if (enemy->health > 0) {
+			return false;
 		}
 	}
-	std::cout << "Game Over!" << std::endl;
-	//system("pause");
+	return true;
+}
+void GetHealing(Character& player, int& killCount)
+{
+	if (killCount >= 3)
+	{
+		player.SetHealth(100);
+
+		system("cls");
+		std::cout << "You found a health potion!" << std::endl;
+		std::cout << "Your health has been restored to 100!" << std::endl;
+		system("pause");
+
+		killCount = 0;
+	}
 }
 
 
+void FightEnemy(std::vector<NPC*>& enemies, int choice,
+	Character& player, int& killCount)
+{
+	int index = choice - 1;
+
+	if (index < 0 || index >= static_cast<int>(enemies.size()))
+	{
+		return;
+	}
+
+	NPC* enemy = enemies[index];
+
+	if (enemy->health <= 0)
+	{
+		system("cls");
+		std::cout << enemy->name << " already defeated!" << std::endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	CombatMenu::PlayerCombat(*enemy, player);
+
+	if (enemy->health <= 0 && player.GetHealth() > 0)
+	{
+		killCount++;
+		GetHealing(player, killCount);
+	}
+}
 
 
-//===The Four Star Grimoire===
-void BattleRoom2::EnterRoom(Character& player) {
-	crook crook1;
-	mage mage1;
-	corruptKnight corruptKnight1;
-
-	bool ColletedArtifact = false;
+bool RunBattleRoom(Character& player,
+	std::vector<NPC*>& enemies,
+	const std::string& roomName,
+	const std::string& missionName,
+	const std::string& missionDesc)
+{
+	player.SetHealth(100);
+	bool collectedArtifcact = false;
+	int killCount = 0;
 	int choice;
+	
 
 	int n = printf("                                                                                                                        ") - 2; //OG:120
 	system("cls");
-	mainMenu::CenterOutput("Second mission", n);
+	mainMenu::CenterOutput(missionName.c_str(), n);
 	Sleep(2000);
+	
 	system("cls");
-	mainMenu::CenterOutput("Locate and secure the Four Star Grimoire.", n);
+	mainMenu::CenterOutput(missionDesc.c_str(), n);
 	Sleep(2000);
+
 	system("cls");
 
 	while (player.GetHealth() > 0)
 	{
-		bool roomCleared = crook1.health <= 0 && mage1.health <= 0 && corruptKnight1.health <= 0;
+		system("cls");
+		bool roomCleared = AllEnemiesDefeated(enemies);
 
-		//temp menu, implement arrow menu later
-		std::cout << "===The Four Star Grimoire===" << std::endl;
-		std::cout << std::endl;
-		//only takes one, make it take multiple
-		std::cout << "Crook " << (crook1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n"; //add enemy amount | ex: 3 Alive, 2 Defeated.
-		std::cout << "Mage " << (mage1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << "Corrupt Knight " << (corruptKnight1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << std::endl;
+			std::cout << "===" << roomName << "===" << std::endl;
 
-		std::cout << "1. Battle Crook" << std::endl;
-		std::cout << "2. Battle Mage" << std::endl;
-		std::cout << "3. Battle Corrupt Knight" << std::endl;
-		std::cout << "4. Collect artifact" << std::endl; //must defeat all enemies first
-		std::cout << "5. Proceed to the next room" << std::endl; //must collect artifact first
+		for (NPC* enemy : enemies)
+		{
+			std::cout << enemy->name << " " << (enemy->health > 0 ? "[Alive]" : "[Defeated]") << std::endl;
+		}
+
+		std::cout << std::endl;
+		std::cout << "== Options ==" << std::endl;
+
+		for (int i = 0; i < static_cast<int>(enemies.size()); i++)
+		{
+			std::cout << i + 1 << ". Battle " << enemies[i]->name << std::endl;
+		}
+		int getOpt = static_cast<int>(enemies.size()) + 1;
+		int roomOpt = static_cast<int>(enemies.size()) + 2;
+
+		std::cout << getOpt << ". Collect artifact" << std::endl;
+		std::cout << roomOpt << ". Proceed to the next room" << std::endl;
 		std::cout << "Choose an option: ";
 
 		if (!(std::cin >> choice))
@@ -170,54 +116,23 @@ void BattleRoom2::EnterRoom(Character& player) {
 			std::cin.ignore(10000, '\n');
 			continue;
 		}
-
-		switch (choice)
+		if (choice >= 1 && choice <= static_cast<int>(enemies.size()))
 		{
-		case 1:
-			if (crook1.health > 0)
-			{
-				CombatMenu::PlayerCombat(crook1, player);
-			}
-			else
+			FightEnemy(enemies, choice, player, killCount);
+		}
+		else if (choice == getOpt)
+		{
+			if (collectedArtifcact)
 			{
 				system("cls");
-				std::cout << "Crook already defeated!" << std::endl;
+				std::cout << "You already collected this artifact!" << std::endl;
 				system("pause");
 				system("cls");
 			}
-			break;
-		case 2:
-			if (mage1.health > 0)
+			else if (roomCleared)
 			{
-				CombatMenu::PlayerCombat(mage1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Mage already defeated!" << std::endl;
-				system("pause");
-				system("cls");
+				collectedArtifcact = true;
 
-			}
-			break;
-		case 3:
-			if (corruptKnight1.health > 0)
-			{
-				CombatMenu::PlayerCombat(corruptKnight1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Corrupt Knight already defeated!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 4:
-			if (roomCleared)
-			{
-				ColletedArtifact = true;
-		
 				system("cls");
 				std::cout << "You collected the artifact!" << std::endl;
 				system("pause");
@@ -226,19 +141,21 @@ void BattleRoom2::EnterRoom(Character& player) {
 			else
 			{
 				system("cls");
-				std::cout << "You must defeat all of the enemies!" << std::endl;
+				std::cout << "You must defeat all enemies first!" << std::endl;
 				system("pause");
 				system("cls");
 			}
-			break;
-		case 5:
-			if (ColletedArtifact)
+		}
+		else if (choice == roomOpt)
+		{
+			if (collectedArtifcact)
 			{
 				system("cls");
-				std::cout << "Prcoceeding to the next room!" << std::endl;
+				std::cout << "Proceeding to the next room!" << std::endl;
 				system("pause");
 				system("cls");
-				BattleRoom3::EnterRoom(player);
+
+				return true;
 			}
 			else
 			{
@@ -247,310 +164,140 @@ void BattleRoom2::EnterRoom(Character& player) {
 				system("pause");
 				system("cls");
 			}
-			break;
-
-		default:
+		}
+		else
+		{
 			system("cls");
 			std::cout << "Invalid Option!" << std::endl;
 			system("pause");
 			system("cls");
-			break;
 		}
 	}
-	system("cls");
-	std::cout << "Game Over!" << std::endl;
-	system("pause");
-	system("cls");
+	return false;
 }
+void BattleRoom1::EnterRoom(Character& player) 
+{
+	crook crook1;
+	mage mage1;
 
+	std::vector<NPC*> enemies =
+	{
+		&crook1,
+		&mage1,
+	};
+
+	bool completed = RunBattleRoom(player, enemies, "The forgotten Amulet", "First Mission", "Locate and secure the amulet");
+
+	if (completed)
+	{
+		BattleRoom2::EnterRoom(player);
+	}
+	else
+	{
+		std::cout << "Game OVer!" << std::endl;
+	}
+}
+	
+//===The Four Star Grimoire===
+void BattleRoom2::EnterRoom(Character& player)
+{
+	crook crook1;
+	mage mage1;
+	corruptKnight knight1;
+
+	std::vector<NPC*> enemies = {
+		&crook1,
+		&mage1,
+		&knight1
+	};
+
+	bool completed = RunBattleRoom(player, enemies, "The Four Star Grimoire", "Second mission", "Locate and secure the Four Star Grimoire.");
+
+	if (completed)
+	{
+		BattleRoom3::EnterRoom(player);
+	}
+	else
+	{
+		std::cout << "Game Over!" << std::endl;
+	}
+}
 
 
 //===Artifact 3===
-void BattleRoom3::EnterRoom(Character& player) {
+void BattleRoom3::EnterRoom(Character& player)
+{
 	crook crook1;
 	mage mage1;
-	corruptKnight corruptKnight1;
+	corruptKnight knight1;
 
-	bool ColletedArtifact = false;
-	int choice;
+	std::vector<NPC*> enemies = {
+		&crook1,
+		&mage1,
+		&knight1
+	};
 
-	int n = printf("                                                                                                                        ") - 2; //OG:120
-	system("cls");
-	mainMenu::CenterOutput("Third mission", n);
-	Sleep(2000);
-	system("cls");
-	mainMenu::CenterOutput("Locate and secure <Artifact 3>.", n);
-	Sleep(2000);
-	system("cls");
+	bool completed = RunBattleRoom(player, enemies, "The Ember", "Third mission", "Locate and secure The Ember.");
 
-	while (player.GetHealth() > 0)
+	if (completed)
 	{
-		bool roomCleared = crook1.health <= 0 && mage1.health <= 0 && corruptKnight1.health <= 0;
-
-		//temp menu, implement arrow menu later
-		std::cout << "===Artifact 3===" << std::endl;
-		std::cout << std::endl;
-		//only takes one, make it take multiple
-		std::cout << "Crook " << (crook1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n"; //add enemy amount | ex: 3 Alive, 2 Defeated.
-		std::cout << "Mage " << (mage1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << "Corrupt Knight " << (corruptKnight1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << std::endl;
-
-		std::cout << "1. Battle Crook" << std::endl;
-		std::cout << "2. Battle Mage" << std::endl;
-		std::cout << "3. Battle Corrupt Knight" << std::endl;
-		std::cout << "4. Collect artifact" << std::endl; //must defeat all enemies first
-		std::cout << "5. Proceed to the next room" << std::endl; //must collect artifact first
-		std::cout << "Choose an option: ";
-
-		if (!(std::cin >> choice))
-		{
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
-			continue;
-		}
-
-		switch (choice)
-		{
-		case 1:
-			if (crook1.health > 0)
-			{
-				CombatMenu::PlayerCombat(crook1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Crook already defeated!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 2:
-			if (mage1.health > 0)
-			{
-				CombatMenu::PlayerCombat(mage1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Mage already defeated!" << std::endl;
-				system("pause");
-				system("cls");
-
-			}
-			break;
-		case 3:
-			if (corruptKnight1.health > 0)
-			{
-				CombatMenu::PlayerCombat(corruptKnight1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Corrupt Knight already defeated!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 4:
-			if (roomCleared)
-			{
-				ColletedArtifact = true;
-
-				system("cls");
-				std::cout << "You collected the artifact!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			else
-			{
-				system("cls");
-				std::cout << "You must defeat all of the enemies!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 5:
-			if (ColletedArtifact)
-			{
-				system("cls");
-				std::cout << "Prcoceeding to the next room!" << std::endl;
-				system("pause");
-				system("cls");
-				BattleRoom4::EnterRoom(player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "You must collect the artifact first!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-
-		default:
-			system("cls");
-			std::cout << "Invalid Option!" << std::endl;
-			system("pause");
-			system("cls");
-			break;
-		}
+		BattleRoom4::EnterRoom(player);
 	}
-	system("cls");
-	std::cout << "Game Over!" << std::endl;
-	system("pause");
-	system("cls");
+	else
+	{
+		std::cout << "Game Over!" << std::endl;
+	}
 }
-
 
 
 //===Artifact 4===
-void BattleRoom4::EnterRoom(Character& player) {
+void BattleRoom4::EnterRoom(Character& player)
+{
 	crook crook1;
 	mage mage1;
-	corruptKnight corruptKnight1;
+	corruptKnight knight1;
 
-	bool ColletedArtifact = false;
-	int choice;
+	std::vector<NPC*> enemies = {
+		&crook1,
+		&mage1,
+		&knight1
+	};
 
-	int n = printf("                                                                                                                        ") - 2; //OG:120
-	system("cls");
-	mainMenu::CenterOutput("Fourth mission", n);
-	Sleep(2000);
-	system("cls");
-	mainMenu::CenterOutput("Locate and secure <Artifact 4>.", n);
-	Sleep(2000);
-	system("cls");
+	bool completed = RunBattleRoom(player, enemies, "The Heart of Savoy", "Fourth mission", "Locate and secure The Heart of Savoy.");
 
-	while (player.GetHealth() > 0)
+	if (completed)
 	{
-		bool roomCleared = crook1.health <= 0 && mage1.health <= 0 && corruptKnight1.health <= 0;
-
-		//temp menu, implement arrow menu later
-		std::cout << "===Artifact 4===" << std::endl;
-		std::cout << std::endl;
-		//only takes one, make it take multiple
-		std::cout << "Crook " << (crook1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n"; //add enemy amount | ex: 3 Alive, 2 Defeated.
-		std::cout << "Mage " << (mage1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << "Corrupt Knight " << (corruptKnight1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << std::endl;
-
-		std::cout << "1. Battle Crook" << std::endl;
-		std::cout << "2. Battle Mage" << std::endl;
-		std::cout << "3. Battle Corrupt Knight" << std::endl;
-		std::cout << "4. Collect artifact" << std::endl; //must defeat all enemies first
-		std::cout << "5. Proceed to the next room" << std::endl; //must collect artifact first
-		std::cout << "Choose an option: ";
-
-		if (!(std::cin >> choice))
-		{
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
-			continue;
-		}
-
-		switch (choice)
-		{
-		case 1:
-			if (crook1.health > 0)
-			{
-				CombatMenu::PlayerCombat(crook1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Crook already defeated!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 2:
-			if (mage1.health > 0)
-			{
-				CombatMenu::PlayerCombat(mage1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Mage already defeated!" << std::endl;
-				system("pause");
-				system("cls");
-
-			}
-			break;
-		case 3:
-			if (corruptKnight1.health > 0)
-			{
-				CombatMenu::PlayerCombat(corruptKnight1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Corrupt Knight already defeated!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 4:
-			if (roomCleared)
-			{
-				ColletedArtifact = true;
-
-				system("cls");
-				std::cout << "You collected the artifact!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			else
-			{
-				system("cls");
-				std::cout << "You must defeat all of the enemies!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 5:
-			if (ColletedArtifact)
-			{
-				system("cls");
-				std::cout << "Prcoceeding to the next room!" << std::endl;
-				system("pause");
-				system("cls");
-				BattleRoom5::EnterRoom(player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "You must collect the artifact first!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-
-		default:
-			system("cls");
-			std::cout << "Invalid Option!" << std::endl;
-			system("pause");
-			system("cls");
-			break;
-		}
+		BattleRoom5::EnterRoom(player);
 	}
-	system("cls");
-	std::cout << "Game Over!" << std::endl;
-	system("pause");
-	system("cls");
+	else
+	{
+		std::cout << "Game Over!" << std::endl;
+	}
 }
+
+
+
+
 
 
 
 //===The Boss Room===
-void BattleRoom5::EnterRoom(Character& player) {
+void BattleRoom5::EnterRoom(Character& player) 
+{
+	player.SetHealth(100);
 	crook crook1;
 	mage mage1;
 	corruptKnight corruptKnight1;
 	boss boss;
 
-	bool CraftArtifact = false;
+	std::vector<NPC*> enemies =
+	{
+		&crook1,
+		&mage1,
+		&corruptKnight1
+	};
+
+	int killCount = 0;
 	int choice;
 
 	int n = printf("                                                                                                                        ") - 2; //OG:120
@@ -558,31 +305,42 @@ void BattleRoom5::EnterRoom(Character& player) {
 	mainMenu::CenterOutput("Final mission", n);
 	Sleep(2000);
 	system("cls");
-	mainMenu::CenterOutput("Defeat <Boss name> and craft the artifact.", n);
+	mainMenu::CenterOutput("Defeat Malachar and craft the artifact.", n);
 	Sleep(2000);
 	system("cls");
 
 	while (player.GetHealth() > 0)
 	{
-		bool enemiesDefeated = crook1.health <= 0 && mage1.health <= 0 && corruptKnight1.health <= 0;
-
-		bool roomCleared = crook1.health <= 0 && mage1.health <= 0 && corruptKnight1.health <= 0 && boss.health <= 0;
-
-		//temp menu, implement arrow menu later
+		system("cls");
+		bool enemiesDefeated = AllEnemiesDefeated(enemies);
+		bool roomCleared = enemiesDefeated && boss.health <= 0;
 		std::cout << "===The Final Ruin===" << std::endl;
 		std::cout << std::endl;
-		//only takes one, make it take multiple
-		std::cout << "Crook " << (crook1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n"; //add enemy amount | ex: 3 Alive, 2 Defeated.
-		std::cout << "Mage " << (mage1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << "Corrupt Knight " << (corruptKnight1.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
-		std::cout << "Boss " << (boss.health > 0 ? ">>Alive<<" : ">>Defeated<<") << "\n";
+		for (NPC* enemy : enemies)
+		{
+			std::cout << enemy->name << " "
+				<< (enemy->health > 0 ? "[Alive]" : "[Defeated]")
+				<< std::endl;
+		}
+
+		std::cout << boss.name << " "
+			<< (boss.health > 0 ? "[Alive]" : "[Defeated]")
+			<< std::endl;
 		std::cout << std::endl;
 
-		std::cout << "1. Battle Crook" << std::endl;
-		std::cout << "2. Battle Mage" << std::endl;
-		std::cout << "3. Battle Corrupt Knight" << std::endl;
-		std::cout << "4. Battle boss" << std::endl; //must defeat all enemies first
-		std::cout << "5. Craft artifact" << std::endl; //must defeat all enemies first	
+		std::cout << "== Options ==" << std::endl;
+
+		for (int i = 0; i < static_cast<int>(enemies.size()); i++)
+		{
+			std::cout << i + 1 << ". Battle "
+				<< enemies[i]->name << std::endl;
+		}
+
+		int bossOpt = static_cast<int>(enemies.size()) + 1;
+		int craftOpt = static_cast<int>(enemies.size()) + 2;
+
+		std::cout << bossOpt << ". Battle " << boss.name << std::endl;
+		std::cout << craftOpt << ". Craft artifact" << std::endl;
 		std::cout << "Choose an option: ";
 
 		if (!(std::cin >> choice))
@@ -592,100 +350,57 @@ void BattleRoom5::EnterRoom(Character& player) {
 			continue;
 		}
 
-		switch (choice)
+		if (choice >= 1 && choice <= static_cast<int>(enemies.size()))
 		{
-		case 1:
-			if (crook1.health > 0)
-			{
-				CombatMenu::PlayerCombat(crook1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Crook already defeated!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 2:
-			if (mage1.health > 0)
-			{
-				CombatMenu::PlayerCombat(mage1, player);
-			}
-			else
-			{
-				system("cls");
-				std::cout << "Mage already defeated!" << std::endl;
-				system("pause");
-				system("cls");
+			FightEnemy(enemies, choice, player, killCount);
+		}
 
-			}
-			break;
-		case 3:
-			if (corruptKnight1.health > 0)
+		else if (choice == bossOpt)
+		{
+			if (!enemiesDefeated)
 			{
-				CombatMenu::PlayerCombat(corruptKnight1, player);
+				system("cls");
+				std::cout << "You must defeat all regular enemies first!" << std::endl;
+				system("pause");
+			}
+			else if (boss.health > 0)
+			{
+				CombatMenu::PlayerCombat(boss, player);
 			}
 			else
 			{
 				system("cls");
-				std::cout << "Corrupt Knight already defeated!" << std::endl;
+				std::cout << "Malachar is already defeated!" << std::endl;
 				system("pause");
-				system("cls");
 			}
-			break;
-		case 4:
-			if (enemiesDefeated) {
-				if (boss.health > 0)
-				{
-					CombatMenu::PlayerCombat(boss, player);
-				}
-				else
-				{
-					system("cls");
-					std::cout << "The Boss is already defeated!" << std::endl;
-					system("pause");
-					system("cls");
-				}
-			}
-			else
-			{
-				system("cls");
-				std::cout << "You must defeat all of the enemies!" << std::endl;
-				system("pause");
-				system("cls");
-			}
-			break;
-		case 5:
+		}
+		else if (choice == craftOpt)
+		{
 			if (roomCleared)
 			{
-				CraftArtifact = true;
-				
-				//temp dialogue, this will take you back to the story and comeplete it.
 				system("cls");
 				std::cout << "You crafted the artifact!" << std::endl;
 				system("pause");
 				system("cls");
+
 				Story::FinalStory();
-				break;
+				return;
 			}
 			else
 			{
 				system("cls");
-				std::cout << "You must defeat all of the enemies!" << std::endl;
+				std::cout << "You must defeat all enemies and Malachar first!" << std::endl;
 				system("pause");
-				system("cls");
 			}
-			break;
-
-		default:
+		}
+		else
+		{
 			system("cls");
 			std::cout << "Invalid Option!" << std::endl;
 			system("pause");
-			system("cls");
-			break;
 		}
 	}
+
 	system("cls");
 	std::cout << "Game Over!" << std::endl;
 	system("pause");

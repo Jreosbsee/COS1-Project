@@ -4,14 +4,8 @@
 #include "NPC.h"
 #include "Character.h"
 #include "Weapons.h"
-#include "Inventory.h"
 #include "MainMenu.h"
 #include "CombatMenu.h"
-
-
-
-
-//Combat Menu Functions:
 
 void CombatMenu::Attack(Character& player, NPC& enemy) {
 	enemy.health -= player.GetDmgLvl();
@@ -24,11 +18,10 @@ void CombatMenu::Attack(Character& player, NPC& enemy) {
 	system("pause");
 	system("cls");
 	Sleep(100);
-	//attack or reference here
 }
 
 
-void CombatMenu::Flee(Character& player) {
+void CombatMenu::Flee() {
 	Character user;
 	Sleep(100);
 	std::cout << "=== FLEE ===" << std::endl;
@@ -45,30 +38,35 @@ void CombatMenu::Flee(Character& player) {
 	//Flee or reference here
 }
 
-
 void CombatMenu::PlayerCombat(NPC& enemy, Character& player)
 {
 	//crook::crDialogue(); implement soon
-	//menu here
 	int point = 1;
-	int min = 1, max = 2;
-	//int health = player.GetHealth();
-	while (true)
+	const int min = 1;
+	const int max = 2;
+
+	while (GetAsyncKeyState(VK_RETURN) & 0x8000)
 	{
+		Sleep(10);
+	}
+
+	while (player.GetHealth() > 0 && enemy.health > 0)
+	{
+		while (GetAsyncKeyState(VK_RETURN) & 0x8000)
+		{
+			Sleep(10);
+		}
+
 		system("cls");
-		std::cout << "=== " << enemy.name << " ===";
+
+		std::cout << "=== " << enemy.name << " ===" << std::endl;
+		std::cout << "Your health: " << player.GetHealth() << std::endl;
+		std::cout << "Enemy health: " << enemy.health << std::endl;
 		std::cout << std::endl;
-		std::cout << "Your health: ";
-		std::cout << player.GetHealth() << std::endl;
-		//how to specify NPC?
-		std::cout << "Enemy health: ";
-		std::cout << enemy.health << std::endl;
-		std::cout << std::endl;
-		std::cout << "=== Select option below ===" << std::endl; //Should be typewriter
-		std::cout << mainMenu::set_arrow(point, 1);
-		std::cout << "Attack" << std::endl;
-		std::cout << mainMenu::set_arrow(point, 2);
-		std::cout << "Flee" << std::endl;
+
+		std::cout << "=== Select option below ===" << std::endl;
+		std::cout << mainMenu::set_arrow(point, 1) << "Attack" << std::endl;
+		std::cout << mainMenu::set_arrow(point, 2) << "Flee" << std::endl;
 
 		while (true)
 		{
@@ -80,7 +78,7 @@ void CombatMenu::PlayerCombat(NPC& enemy, Character& player)
 				}
 				break;
 			}
-			if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+			else if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 			{
 				if (point < max)
 				{
@@ -88,63 +86,51 @@ void CombatMenu::PlayerCombat(NPC& enemy, Character& player)
 				}
 				break;
 			}
-			if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+			else if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 			{
-				while (GetAsyncKeyState(VK_RETURN) & 0x8000) {
-					goto combat_menu;
+				while (GetAsyncKeyState(VK_RETURN) & 0x8000)
+				{
+					Sleep(10);
 				}
 
+				if (point == 1)
+				{
+					Attack(player, enemy);
+
+					if (enemy.health <= 0)
+					{
+						system("cls");
+						std::cout << "You have defeated a "
+							<< enemy.name << "!" << std::endl;
+						system("pause");
+						return;
+					}
+				}
+				else
+				{
+					Flee();
+				}
+
+				EnemyCombat(enemy, player);
+
+				if (player.GetHealth() <= 0)
+				{
+					std::cout << "You have been defeated!" << std::endl;
+					system("pause");
+					return;
+				}
+				break;
 			}
+
+			Sleep(10);
 		}
-		Sleep(100);
-		system("cls");
-		if (false)
+
+		while ((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState(VK_DOWN) & 0x8000))
 		{
-		combat_menu:
-			switch (point) {
-
-			case 1:
-				CombatMenu::Attack(player, enemy);
-				
-				if (enemy.health <= 0)
-				{
-					system("cls");
-					std::cout << "You have defeated a " << enemy.name << "!" << std::endl;
-					system("pause");
-					system("cls");
-					return;
-				}
-				CombatMenu::EnemyCombat(enemy, player);
-				if (player.GetHealth() <= 0)
-				{
-					std::cout << "You have been defeated!" << std::endl;
-					system("pause");
-					system("cls");
-					return;
-				}
-				Sleep(100);
-				break;
-
-			case 2:
-				CombatMenu::Flee(player);
-				CombatMenu::EnemyCombat(enemy, player);
-
-				if (player.GetHealth() <= 0)
-				{
-					std::cout << "You have been defeated!" << std::endl;
-					system("pause");
-					system("cls");
-					return;
-				}
-				Sleep(100);
-				break;
-			}
+			Sleep(10);
 		}
 	}
 }
-
-
-
 	void CombatMenu::EnemyCombat(NPC& enemy, Character& player)
 	{
 		std::cout << "=== " << enemy.name << " ===" << std::endl;
