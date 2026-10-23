@@ -14,8 +14,9 @@
 //Start right at main menu
 void Story::mainStory() 
 {
-	
-	mainMenu::MainMenu();
+	Character player;
+	//mainMenu::MainMenu();
+	BattleRoom5::EnterRoom(player);
 }
 
 
@@ -65,7 +66,7 @@ void Story::mainStory()
 		Sleep(1500);
 		mainMenu::typewriter("This regime went by the name of Zloduh. They worshipped the very demons that sent Savoy into anguish, and are");
 		std::cout << std::endl;
-		mainMenu::typewriter("preparing for *his* resummoning.");
+		mainMenu::typewriter("preparing for Malachar's resummoning.");
 		std::cout << std::endl;
 		std::cout << std::endl;
 		Sleep(1500);
@@ -144,6 +145,7 @@ void Story::mainStory()
 	void Story::FinalStory() {
 		mainMenu::typewriter("You did it! You actually did it! Savoy has been saved once again!");
 		std::cout << std::endl;
+		system("pause");
 		mainMenu::typewriter("You win the game! Congrats!");
 		std::cout << std::endl;
 		system("pause");

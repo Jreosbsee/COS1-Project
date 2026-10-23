@@ -7,7 +7,7 @@
 Character::Character() {
 	health = 100;
 	level = 0;
-	dmgLvl = 3;
+	dmgLvl = 5;
 }
 
 //Set character default stats

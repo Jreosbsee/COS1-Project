@@ -82,11 +82,41 @@ void mainMenu::MainMenu()
 	while (true) 
 	{
 		system("cls");
+
+		//console window dimensions
+		CONSOLE_SCREEN_BUFFER_INFO csbi;
+		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+
+		GetConsoleScreenBufferInfo(console, &csbi);
+
+		int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+		int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+
+		//Menu position to the middle
+		int menuWidth = 24;
+		int menuHeight = 5;
+
+		int left = (width - menuWidth) / 2;
+		int top = (height - menuHeight) / 2;
+
+		if (left < 0) left = 0;
+		if (top < 0) top = 0;
+
+		//Console curse to menu starting pos
+		COORD position;
+		position.X = static_cast<SHORT>(csbi.srWindow.Left + left);
+		position.Y = static_cast<SHORT>(csbi.srWindow.Top + top);
+
+		SetConsoleCursorPosition(console, position);
+
 		std::cout << "=== The Final Ruin ===" << std::endl;
-		std::cout << set_arrow(point, 1) << "Play Game" << std::endl;
-		std::cout << set_arrow(point, 2) << "Settings" << std::endl;
-		std::cout << set_arrow(point, 3) << "Credits" << std::endl;
-		std::cout << set_arrow(point, 4) << "Exit" << std::endl;
+
+		std::string padding(left + 4,' ');
+
+		std::cout << padding <<  set_arrow(point, 1) << "Play Game" << std::endl;
+		std::cout << padding <<  set_arrow(point, 2) << "Settings" << std::endl;
+		std::cout << padding <<  set_arrow(point, 3) << "Credits" << std::endl;
+		std::cout << padding <<  set_arrow(point, 4) << "Exit" << std::endl;
 
 		while (true)
 		{

@@ -1,108 +1,49 @@
+
 #pragma once
-#include <iostream>
-class Weapons {
+#include <string>
+
+class Weapons
+{
 protected:
 	std::string name;
-	int level;
-	int dmgLvl;	
+	int level = 0;
+	int dmgLvl = 0;
 };
 
-//Default weapon
-class woodenSword : public Weapons {
+// Default weapon
+class woodenSword : public Weapons
+{
 public:
-	void SetDefaultWeapon();
+	//void SetDefaultWeapon();
 	static void DWDialogue();
 };
 
 
-class BroadSword : public Weapons {
-public:
-	static void  SetWeapon();
-	static void BroadSwordDialogue();
-};
-
-
-class LongSword : public Weapons {
-public:
-	static void SetWeapon();
-	static void LongSwordDialogue();
-};
-
-
-class Claymore : public Weapons {
-public:
-	static void SetWeapon();
-	static void ClaymoreDialogue();
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//#pragma once
-//#include <iostream>
-//class Weapons {
-//public:
-//	std::string name;
-//	int level;
-//	int dmgLvl;
-//
-//
-//};
-//
-////Default weapon
-//class woodenSword : public Weapons {
-//public:
-//	std::string name;
-//	int level = 0;
-//	int wdmgLvl = 2;
-//
-//	static void SetDefaultWeapon();
-//	static void DWDialogue();
-//};
-//
-//
-//
+//Future Feature
 //class BroadSword : public Weapons {
-//
-//	std::string name;
-//	int level = 2;
-//	int wdmgLvl = 4;
-//
+//public:
 //	static void  SetWeapon();
 //	static void BroadSwordDialogue();
 //};
 //
-//class LongSword : public Weapons {
 //
-//	std::string name;
-//	int level = 3;
-//	int wdmgLvl = 5;
+//class LongSword : public Weapons {
+//public:
 //	static void SetWeapon();
 //	static void LongSwordDialogue();
 //};
 //
+//
 //class Claymore : public Weapons {
-//
-//	std::string name;
-//	int level = 4;
-//	int wdmgLvl = 6;
-//
+//public:
 //	static void SetWeapon();
 //	static void ClaymoreDialogue();
 //};
+
+
+
+
+
+//Weapon Idea for Boss:
+
+//"Skull of the Underworld", "Demon Sword";

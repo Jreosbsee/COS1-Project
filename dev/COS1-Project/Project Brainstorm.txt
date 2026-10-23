@@ -39,16 +39,6 @@ Links to outside resources:
 
 
 
-
-~~~~Notes review~~~~
-header = what exists
-cpp = how it works
-main = where the program starts
-
-
-
-
-
 Story to add::
 
 Peace was never a permanent outcome. Savoy celebrated their victorious win againts the demonic war, but since that day, no one stepped up to take 
@@ -69,23 +59,6 @@ bring peace back to your land. Many have died on this journey, but the reward of
 Mission one.
 
 you are to clear the room of anyone that stands in your way. Locate and secure the artifact. 
-
-
-
-Milestone 3: Things left to do before submitting:
-
--Rewrite menu functionaliy to minimize confusion
--Finish combat system for player
--Finish combay system for enemy
--Finishing any story that needs to be written
--Creating text based story maps to connect everything together. Here is the outline:
-
-"Welcone to room (room name)!"
-Room info:
-
-x NPC's
-x enemies
-x artifacts
 
 
 What would you like to do?
@@ -112,13 +85,6 @@ That is the outline for all room in the game. Each room will have varying NPCs a
 - Potentially some story line between rooms
 
 
-Things to note while creating rooms
-
--Need to ensure enemy amount stays the same when player goes to talk to an NPC or collects artifact.
--Make sure values reset for new rooms
--
-
-
 EXTRA NOTES
 - 0x0008: Manipulates transition state flag
 -->Transition state flag indicates whether 
@@ -140,13 +106,6 @@ In the case of my menu, 0x0008 is checking when key is
 pressed and released for up, down, and return keys.
 
 
-Story.cpp Line 131+:
-
-Need some sort of loop to continue battle until enemy is defeated, player dies, or player flees.
-
-
-
-
 Add critical hits method where theres a chance the player and the enemy can deal extra damage to each other
 
 -Lower the health of every NPC OR up the dmg level so battles dont take forever to finish. Battles should
@@ -161,26 +120,6 @@ Implement other weapons?
 
 
 
-
-BattleRoom:
-
-When crook is defeated, I didnt see message appear for that enemy.
-When mage is defeated, deaftead message pops up, but the mission info loops back into the menu, then it shows crook and mage defeated 
-under then ===The forgotten Amulet=== title.
-
-
-When selecting "battle crook" it battles both crook and mage.
-
-perssing collect artifact goes to "starting story" (this makes sense, no logic has yet been added for atifcats.)
-
-
-
-
-
-
-In battle:
-
-Keep health of player and enemy always showing at the top to keep better track of health?
 
 
 ========================
@@ -203,24 +142,3 @@ BattleRoom:
 - Create one Battle Room class and pass in values to make it useable for all 5 rooms
 - Impelemnt Menu into Battle Room class
 - Use enemy collection to support multiple enemies within Battle Rooms.
-
-
-
-Commit 1: Refactored Battle Room code
-
-Commit 2: 
--Added health potion for every 3 enemies defeated.
--->Added a kill counter to tack when enemies die, then rewards the 
-player a health potion that resets their health back to 100.
-
--Refactored Character
--->Fixed SetLvl() to only modify existing character
--->Removed unnecessary objects and unused pointers/constructors
--->Removed inventory functionality.
--->Removed unnecessary comments and code duplications.
-
--Refactored Main Menu
--->Improved readability of code.
--->Optimized typerwriter method.
--->Optimized arrow-key based menu
--->Removed unnecessary comments and code duplications.

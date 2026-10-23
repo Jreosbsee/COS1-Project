@@ -237,13 +237,7 @@ void BattleRoom3::EnterRoom(Character& player)
 		&knight1
 	};
 
-	bool completed = RunBattleRoom(
-		player,
-		enemies,
-		"Artifact 3",
-		"Third mission",
-		"Locate and secure <Artifact 3>."
-	);
+	bool completed = RunBattleRoom(player, enemies, "The Ember", "Third mission", "Locate and secure The Ember.");
 
 	if (completed)
 	{
@@ -269,13 +263,7 @@ void BattleRoom4::EnterRoom(Character& player)
 		&knight1
 	};
 
-	bool completed = RunBattleRoom(
-		player,
-		enemies,
-		"Artifact 4",
-		"Fourth mission",
-		"Locate and secure <Artifact 4>."
-	);
+	bool completed = RunBattleRoom(player, enemies, "The Heart of Savoy", "Fourth mission", "Locate and secure The Heart of Savoy.");
 
 	if (completed)
 	{
@@ -317,7 +305,7 @@ void BattleRoom5::EnterRoom(Character& player)
 	mainMenu::CenterOutput("Final mission", n);
 	Sleep(2000);
 	system("cls");
-	mainMenu::CenterOutput("Defeat <Boss name> and craft the artifact.", n);
+	mainMenu::CenterOutput("Defeat Malachar and craft the artifact.", n);
 	Sleep(2000);
 	system("cls");
 
@@ -382,7 +370,7 @@ void BattleRoom5::EnterRoom(Character& player)
 			else
 			{
 				system("cls");
-				std::cout << "The Boss is already defeated!" << std::endl;
+				std::cout << "Malachar is already defeated!" << std::endl;
 				system("pause");
 			}
 		}
@@ -401,7 +389,7 @@ void BattleRoom5::EnterRoom(Character& player)
 			else
 			{
 				system("cls");
-				std::cout << "You must defeat all enemies and the boss first!" << std::endl;
+				std::cout << "You must defeat all enemies and Malachar first!" << std::endl;
 				system("pause");
 			}
 		}
